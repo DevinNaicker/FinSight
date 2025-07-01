@@ -1,38 +1,57 @@
 import requests
 from django.conf import settings
 from django.shortcuts import render
+import time
+import json
 
 def stock_search(request):
     stock_data = None
+    chart_data = None
     error = None
 
     if request.method == 'POST':
         ticker = request.POST.get('ticker').upper()
-        api_key = settings.FINNHUB_API_KEY
-        url = f"https://finnhub.io/api/v1/quote?symbol={ticker}&token={api_key}"
+        api_key = settings.TWELVE_DATA_API_KEY
 
         try:
-            response = requests.get(url)
-            data = response.json()
-            print(data)
+            # 📈 Real-time quote
+            quote_url = f"https://api.twelvedata.com/quote?symbol={ticker}&apikey={api_key}"
+            quote_response = requests.get(quote_url).json()
 
-            if response.status_code == 200 and data.get("c"):
-                stock_data = {
-                    'ticker': ticker,
-                    'current': data['c'],
-                    'open': data['o'],
-                    'high': data['h'],
-                    'low': data['l'],
-                    'prev_close': data['pc'],
-                    'change': data['d'],
-                    'percent_change': data['dp']
+            if "close" not in quote_response or "code" in quote_response:
+                raise ValueError(quote_response.get("message", "Invalid ticker."))
+
+            stock_data = {
+                'ticker': ticker,
+                'current': float(quote_response['close']),
+                'open': float(quote_response['open']),
+                'high': float(quote_response['high']),
+                'low': float(quote_response['low']),
+                'prev_close': float(quote_response['previous_close']),
+                'change': float(quote_response['change']),
+                'percent_change': float(quote_response['percent_change']),
+            }
+
+            # 🕓 7-day historical data
+            now = time.strftime('%Y-%m-%d')
+            history_url = f"https://api.twelvedata.com/time_series?symbol={ticker}&interval=1day&outputsize=7&apikey={api_key}"
+            history_response = requests.get(history_url).json()
+
+            if "values" in history_response:
+                history = history_response["values"]
+                labels = [entry["datetime"] for entry in reversed(history)]
+                prices = [float(entry["close"]) for entry in reversed(history)]
+
+                chart_data = {
+                    'labels': json.dumps(labels),
+                    'prices': json.dumps(prices),
                 }
-            else:
-                error = f"No data found for '{ticker}'."
+
         except Exception as e:
-            error = f"Error fetching data: {str(e)}"
+            error = str(e)
 
     return render(request, 'stocks/stock_search.html', {
         'stock_data': stock_data,
-        'error': error
+        'chart_data': chart_data,
+        'error': error,
     })

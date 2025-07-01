@@ -1,0 +1,21 @@
+<h1>Financial News Feed</h1>
+
+{% if error %}
+  <p style="color:red;">{{ error }}</p>
+{% endif %}
+
+{% if articles %}
+  <ul>
+    {% for article in articles %}
+      <li>
+        <h3><a href="{{ article.url }}" target="_blank">{{ article.title }}</a></h3>
+        {% if article.description %}
+          <p>{{ article.description }}</p>
+        {% endif %}
+        <hr>
+      </li>
+    {% endfor %}
+  </ul>
+{% else %}
+  <p>No news available.</p>
+{% endif %}

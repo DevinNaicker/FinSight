@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'stocks',
+    'news',
 ]
 
 MIDDLEWARE = [
@@ -124,5 +125,8 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-# Finnhub API key
-FINNHUB_API_KEY = "d1ham4hr01qsvr29003gd1ham4hr01qsvr290040"
+# Twelve Data API key
+TWELVE_DATA_API_KEY = "de5874e84d14461da6914440fb9ace8d"
+
+# News API key
+NEWS_API_KEY = "52b661e836a04292ac1871d3ee0d2e2b"

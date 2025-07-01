@@ -21,3 +21,34 @@
     <li><strong>Change:</strong> ${{ stock_data.change }} ({{ stock_data.percent_change }}%)</li>
   </ul>
 {% endif %}
+
+{% if chart_data %}
+<h2>7-Day Price Chart</h2>
+<canvas id="priceChart" width="600" height="300"></canvas>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+  const ctx = document.getElementById('priceChart').getContext('2d');
+  const priceChart = new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels: {{ chart_data.labels|safe }},
+      datasets: [{
+        label: '{{ stock_data.ticker }} Price',
+        data: {{ chart_data.prices|safe }},
+        borderWidth: 2,
+        fill: false,
+        tension: 0.1
+      }]
+    },
+    options: {
+      responsive: true,
+      scales: {
+        y: {
+          beginAtZero: false
+        }
+      }
+    }
+  });
+</script>
+{% endif %}
