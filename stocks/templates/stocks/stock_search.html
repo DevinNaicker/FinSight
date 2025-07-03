@@ -1,14 +1,141 @@
 {% extends 'base.html' %}
+{% load static %}
+{% load humanize %}
 
 {% block content %}
-<div class="container mt-4">
-  <h1 class="mb-4">Stock Lookup</h1>
+<style>
+  input::placeholder {
+    color: #ffffff !important;
+  }
 
+  .btn-search {
+    transition: background-color 0.3s ease, transform 0.2s ease;
+  }
+
+  .btn-search:hover {
+    background-color: #168a8d !important;
+    transform: scale(1.05);
+  }
+
+  .stock-info-row {
+    background-color: transparent;
+    color: white;
+    padding: 0.5rem 0rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 1.8rem;
+  }
+
+  .stock-left {
+    display: flex;
+    align-items: baseline;
+    gap: 0.75rem;
+  }
+
+  .ticker {
+    color: #ffffff;
+    font-size: 2.3rem;
+    font-weight: 600;
+  }
+
+  .company-name {
+    color: #1cabb0;
+    font-size: 1.75rem;
+  }
+
+  .stock-right {
+    display: flex;
+    align-items: center;
+    gap: 1.2rem;
+    text-align: right;
+  }
+
+  .price {
+    color: white;
+    font-weight: 500;
+  }
+
+  .positive {
+    color: green;
+  }
+
+  .negative {
+    color: red;
+  }
+
+  .arrow {
+    font-size: 2rem;
+    font-weight: bold;
+  }
+
+  .stock-divider {
+    border: none;
+    height: 4px;
+    background-color: #1cabb0;
+    margin: 0rem 0;
+    opacity: 1;
+  }
+
+  .stats-section {
+    margin-top: 2rem;
+    color: white;
+  }
+
+  .stats-title {
+    font-size: 1.6rem;
+    margin-bottom: 1rem;
+  }
+
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+  }
+
+  .stat-item {
+    margin-bottom: 0.6rem;
+  }
+
+  .stat-label {
+    color: #bebec0;
+    font-weight: 500;
+  }
+
+  .stat-value {
+    color: white;
+    font-weight: 600;
+    font-size: 1.1rem;
+  }
+
+  .silver-divider {
+  border: none;
+  height: 1.5px;
+  background-color: #bebec0;
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+  opacity: 0.8;
+}
+</style>
+
+<div class="container mt-4">
+  <!-- Search Bar -->
   <form method="post" class="mb-4">
     {% csrf_token %}
-    <div class="input-group">
-      <input type="text" name="ticker" class="form-control" placeholder="Enter stock ticker" required>
-      <button class="btn btn-primary" type="submit">Search</button>
+    <div class="input-group mt-3 w-50 mx-auto">
+      <input
+        type="text"
+        name="ticker"
+        class="form-control"
+        placeholder="Enter stock ticker (e.g., AAPL)"
+        required
+        style="background-color: #051d40 !important; color: #ffffff !important; border: 1px solid #1cabb0 !important; caret-color: white !important;">
+      <button
+        type="submit"
+        class="btn btn-search"
+        style="background-color: #1cabb0; color: white; border: none;">
+        Search
+      </button>
     </div>
   </form>
 
@@ -17,42 +144,145 @@
   {% endif %}
 
   {% if stock_data %}
-    <h2>{{ stock_data.ticker }}</h2>
-    <ul class="list-group mb-4">
-      <li class="list-group-item"><strong>Current Price:</strong> ${{ stock_data.current }}</li>
-      <li class="list-group-item"><strong>Open:</strong> ${{ stock_data.open }}</li>
-      <li class="list-group-item"><strong>High:</strong> ${{ stock_data.high }}</li>
-      <li class="list-group-item"><strong>Low:</strong> ${{ stock_data.low }}</li>
-      <li class="list-group-item"><strong>Previous Close:</strong> ${{ stock_data.prev_close }}</li>
-      <li class="list-group-item"><strong>Change:</strong> ${{ stock_data.change }} ({{ stock_data.percent_change }}%)</li>
-    </ul>
+    <div class="stock-info-row">
+      <div class="stock-left">
+        <span class="ticker">{{ stock_data.ticker }}</span>
+        <span class="company-name">{{ stock_data.name }}</span>
+      </div>
+      <div class="stock-right">
+        <span class="price">${{ stock_data.current }}</span>
+        <span class="{% if stock_data.change >= 0 %}positive{% else %}negative{% endif %}">
+          {% if stock_data.change >= 0 %}+{% else %}-{% endif %}${{ stock_data.change|floatformat:2 }}
+        </span>
+        <span class="{% if stock_data.change >= 0 %}positive{% else %}negative{% endif %}">
+          ({{ stock_data.percent_change|floatformat:2 }}%)
+        </span>
+        <span class="arrow {% if stock_data.change >= 0 %}text-success{% else %}text-danger{% endif %}">
+          {% if stock_data.change >= 0 %}↑{% else %}↓{% endif %}
+        </span>
+      </div>
+    </div>
   {% endif %}
 
-  {% if chart_data %}
-    <h2>7-Day Price Chart</h2>
-    <canvas id="priceChart" width="600" height="300" class="mb-4"></canvas>
+  <hr class="stock-divider">
 
+   {% if stats_data %}
+  <div class="stats-grid text-white" style="font-size: 1.15rem; display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; margin-top: 1rem;">
+    <div>
+      <p style="display: flex; justify-content: space-between; border-bottom: 1px solid #1cabb0; padding-bottom: 0.4rem;"><strong>Exchange</strong> <span>{{ stats_data.exchange }}</span></p>
+      <p style="display: flex; justify-content: space-between; border-bottom: 1px solid #1cabb0; padding-bottom: 0.4rem;"><strong>Trading Volume</strong> <span>{{ stats_data.volume|intcomma }}</span></p>
+    </div>
+    <div>
+      <p style="display: flex; justify-content: space-between; border-bottom: 1px solid #1cabb0; padding-bottom: 0.4rem;"><strong>Previous Close</strong> <span>${{ stats_data.prev_close }}</span></p>
+      <p style="display: flex; justify-content: space-between; border-bottom: 1px solid #1cabb0; padding-bottom: 0.4rem;"><strong>Open</strong> <span>${{ stats_data.open }}</span></p>
+    </div>
+    <div>
+      <p style="display: flex; justify-content: space-between; border-bottom: 1px solid #1cabb0; padding-bottom: 0.4rem;"><strong>High</strong> <span>${{ stats_data.high }}</span></p>
+      <p style="display: flex; justify-content: space-between; border-bottom: 1px solid #1cabb0; padding-bottom: 0.4rem;"><strong>Low</strong> <span>${{ stats_data.low }}</span></p>
+    </div>
+  </div>
+{% endif %}
+
+<hr class="silver-divider">
+
+  {% if chart_data %}
+    <h4 class="text-white mt-3 mb-2" style="font-size: 1.4rem;">7 Day Financial Insight</h4>
+    <canvas id="priceChart" width="600" height="300" class="mb-4"></canvas>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
       const ctx = document.getElementById('priceChart').getContext('2d');
+      const prices = {{ chart_data.prices|safe }};
+      const labels = {{ chart_data.labels|safe }};
+      const isUp = prices[prices.length - 1] >= prices[0];
+
+      const gradient = ctx.createLinearGradient(0, 0, 0, 400);
+      if (isUp) {
+        gradient.addColorStop(0, 'rgba(0, 255, 0, 0.45)');
+        gradient.addColorStop(0.6, 'rgba(0, 255, 0, 0.1)');
+        gradient.addColorStop(1, 'rgba(0, 255, 0, 0)');
+      } else {
+        gradient.addColorStop(0, 'rgba(255, 0, 0, 0.45)');
+        gradient.addColorStop(0.6, 'rgba(255, 0, 0, 0.1)');
+        gradient.addColorStop(1, 'rgba(255, 0, 0, 0)');
+      }
+
       const priceChart = new Chart(ctx, {
         type: 'line',
         data: {
-          labels: {{ chart_data.labels|safe }},
+          labels: labels,
           datasets: [{
-            label: '{{ stock_data.ticker }} Price',
-            data: {{ chart_data.prices|safe }},
-            borderColor: 'rgba(75, 192, 192, 1)',
-            borderWidth: 2,
-            fill: false,
+            data: prices,
+            borderColor: '#1cabb0',
+            backgroundColor: gradient,
+            borderWidth: 4,
+            fill: true,
             tension: 0.1
           }]
         },
         options: {
           responsive: true,
           scales: {
+            x: {
+              grid: {
+                display: false,
+                drawTicks: false,
+                drawBorder: true
+              },
+              ticks: {
+                color: '#ffffff',
+                padding: 10,
+                font: {
+                  size: 16,
+                  weight: '500'
+                },
+                callback: function(value, index, ticks) {
+                  const label = this.getLabelForValue(value);
+                  const date = new Date(label);
+                  return date.toLocaleDateString('en-US', {
+                    month: 'short',
+                    day: 'numeric'
+                  });
+                }
+              },
+              border: {
+                color: '#bebec0',
+                width: 2
+              }
+            },
             y: {
-              beginAtZero: false
+              grid: {
+                color: '#bebec0',
+                lineWidth: 0.5,
+                drawTicks: false,
+                drawBorder: false
+              },
+              ticks: {
+                color: '#ffffff',
+                padding: 10,
+                font: {
+                  size: 16,
+                  weight: '500'
+                }
+              },
+              border: {
+                display: false
+              }
+            }
+          },
+          plugins: {
+            legend: {
+              display: false
+            },
+            title: {
+              display: false
+            },
+            tooltip: {
+              enabled: true,
+              backgroundColor: '#1cabb0',
+              titleColor: '#ffffff',
+              bodyColor: '#ffffff',
+              borderColor: '#ffffff',
+              borderWidth: 1
             }
           }
         }

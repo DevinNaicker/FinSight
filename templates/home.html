@@ -61,7 +61,7 @@
   }
 
   .company-name {
-    color: #bebec0;
+    color: #1cabb0;
     font-size: 0.9rem;
     margin-bottom: 0;
   }
@@ -148,15 +148,25 @@
 
   <!-- News Feed -->
   <h3 class="mt-5 mb-3 text-white">Latest Financial News</h3>
-  <div style="background-color: #bebec0; border: 2px solid #1cabb0; border-radius: 5px;">
-    {% for article in news %}
-      <a
-        href="{{ article.url }}"
+  <div>
+    <div style="background-color: #1cabb0; height: 4px;"></div>
+    <div style="background-color: #051d40;">
+      {% for article in news %}
+      <a href="{{ article.url }}"
         class="d-block px-3 py-2 text-decoration-none news-item"
-        style="background-color: #bebec0; color: black; border-bottom: 1px solid #1cabb0;">
-        {{ article.title }}
-      </a>
-    {% endfor %}
+        style="background-color: #051d40; color: white; border-bottom: 1px solid #1cabb0;">
+        <div>{{ article.title }}</div>
+        {% if article.published %}
+          <small style="color: #1cabb0; font-weight: 600;">
+            {{ article.source }}
+          </small>
+          <small style="color: #ccc;">
+            &middot; {{ article.published|timesince }} ago &middot; {{ article.published|date:"l, j F" }}
+          </small>
+        {% endif %}
+      </a>  
+      {% endfor %}
+    </div>
   </div>
 </div>
 {% endblock %}

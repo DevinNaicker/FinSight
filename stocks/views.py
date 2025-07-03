@@ -1,8 +1,9 @@
 import requests
 from django.conf import settings
 from django.shortcuts import render
-import time
+from datetime import datetime, timezone
 import json
+import pprint
 
 # HOMEPAGE VIEW
 def home(request):
@@ -16,7 +17,30 @@ def home(request):
         news_url = f"https://newsapi.org/v2/top-headlines?category=business&language=en&pageSize=5&apiKey={api_key}"
         news_response = requests.get(news_url).json()
         if news_response.get("status") == "ok":
-            news = news_response.get("articles", [])
+            articles = news_response.get("articles", [])
+            for article in articles:
+                title = article.get('title', '')
+                source = article.get('source', {}).get('name', '')
+                url = article.get('url')
+                published_at = article.get('publishedAt', '')
+
+                if title.endswith(f" - {source}"):
+                    title = title.rsplit(f" - {source}", 1)[0]
+
+                published_dt = None
+                if published_at:
+                    try:
+                        published_dt = datetime.strptime(published_at, "%Y-%m-%dT%H:%M:%SZ")
+                        published_dt = published_dt.replace(tzinfo=timezone.utc)
+                    except Exception as e:
+                        print(f"Failed to parse publishedAt: {e}")
+
+                news.append({
+                    'title': title,
+                    'url': url,
+                    'source': source,
+                    'published': published_dt,
+                })
 
         # Popular Stocks API
         stock_api_key = settings.TWELVE_DATA_API_KEY
@@ -45,10 +69,11 @@ def home(request):
     })
 
 
-# STOCK SEARCH VIEW — ⛔️ Not modified as per your request
+# STOCK SEARCH VIEW
 def stock_search(request):
     stock_data = None
     chart_data = None
+    stats_data = None
     error = None
 
     if request.method == 'POST':
@@ -65,6 +90,7 @@ def stock_search(request):
 
             stock_data = {
                 'ticker': ticker,
+                'name': quote_response.get('name', ''),
                 'current': float(quote_response['close']),
                 'open': float(quote_response['open']),
                 'high': float(quote_response['high']),
@@ -88,11 +114,27 @@ def stock_search(request):
                     'prices': json.dumps(prices),
                 }
 
+            stats_data = {
+                'exchange': quote_response.get('exchange', '-'),
+                'volume': int(quote_response.get('volume', 0)),
+                'prev_close': float(quote_response.get('previous_close', 0)),
+                'open': float(quote_response.get('open', 0)),
+                'high': float(quote_response.get('high', 0)),
+                'low': float(quote_response.get('low', 0)),
+            }         
+
+            # Print parsed stats data
+            print("PARSED STATS DATA >>>")
+            for key, value in stats_data.items():
+                print(f"{key}: {value}")
+
         except Exception as e:
             error = str(e)
+            print(f"Error fetching stock data: {error}")
 
     return render(request, 'stocks/stock_search.html', {
         'stock_data': stock_data,
         'chart_data': chart_data,
+        'stats_data': stats_data,
         'error': error,
     })
