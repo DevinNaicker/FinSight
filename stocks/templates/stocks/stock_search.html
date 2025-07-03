@@ -1,54 +1,63 @@
-<h1>Stock Lookup</h1>
+{% extends 'base.html' %}
 
-<form method="post">
-  {% csrf_token %}
-  <input type="text" name="ticker" placeholder="Enter stock ticker" required>
-  <button type="submit">Search</button>
-</form>
+{% block content %}
+<div class="container mt-4">
+  <h1 class="mb-4">Stock Lookup</h1>
 
-{% if error %}
-  <p style="color: red;">{{ error }}</p>
-{% endif %}
+  <form method="post" class="mb-4">
+    {% csrf_token %}
+    <div class="input-group">
+      <input type="text" name="ticker" class="form-control" placeholder="Enter stock ticker" required>
+      <button class="btn btn-primary" type="submit">Search</button>
+    </div>
+  </form>
 
-{% if stock_data %}
-  <h2>{{ stock_data.ticker }}</h2>
-  <ul>
-    <li><strong>Current Price:</strong> ${{ stock_data.current }}</li>
-    <li><strong>Open:</strong> ${{ stock_data.open }}</li>
-    <li><strong>High:</strong> ${{ stock_data.high }}</li>
-    <li><strong>Low:</strong> ${{ stock_data.low }}</li>
-    <li><strong>Previous Close:</strong> ${{ stock_data.prev_close }}</li>
-    <li><strong>Change:</strong> ${{ stock_data.change }} ({{ stock_data.percent_change }}%)</li>
-  </ul>
-{% endif %}
+  {% if error %}
+    <div class="alert alert-danger">{{ error }}</div>
+  {% endif %}
 
-{% if chart_data %}
-<h2>7-Day Price Chart</h2>
-<canvas id="priceChart" width="600" height="300"></canvas>
+  {% if stock_data %}
+    <h2>{{ stock_data.ticker }}</h2>
+    <ul class="list-group mb-4">
+      <li class="list-group-item"><strong>Current Price:</strong> ${{ stock_data.current }}</li>
+      <li class="list-group-item"><strong>Open:</strong> ${{ stock_data.open }}</li>
+      <li class="list-group-item"><strong>High:</strong> ${{ stock_data.high }}</li>
+      <li class="list-group-item"><strong>Low:</strong> ${{ stock_data.low }}</li>
+      <li class="list-group-item"><strong>Previous Close:</strong> ${{ stock_data.prev_close }}</li>
+      <li class="list-group-item"><strong>Change:</strong> ${{ stock_data.change }} ({{ stock_data.percent_change }}%)</li>
+    </ul>
+  {% endif %}
 
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<script>
-  const ctx = document.getElementById('priceChart').getContext('2d');
-  const priceChart = new Chart(ctx, {
-    type: 'line',
-    data: {
-      labels: {{ chart_data.labels|safe }},
-      datasets: [{
-        label: '{{ stock_data.ticker }} Price',
-        data: {{ chart_data.prices|safe }},
-        borderWidth: 2,
-        fill: false,
-        tension: 0.1
-      }]
-    },
-    options: {
-      responsive: true,
-      scales: {
-        y: {
-          beginAtZero: false
+  {% if chart_data %}
+    <h2>7-Day Price Chart</h2>
+    <canvas id="priceChart" width="600" height="300" class="mb-4"></canvas>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+      const ctx = document.getElementById('priceChart').getContext('2d');
+      const priceChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+          labels: {{ chart_data.labels|safe }},
+          datasets: [{
+            label: '{{ stock_data.ticker }} Price',
+            data: {{ chart_data.prices|safe }},
+            borderColor: 'rgba(75, 192, 192, 1)',
+            borderWidth: 2,
+            fill: false,
+            tension: 0.1
+          }]
+        },
+        options: {
+          responsive: true,
+          scales: {
+            y: {
+              beginAtZero: false
+            }
+          }
         }
-      }
-    }
-  });
-</script>
-{% endif %}
+      });
+    </script>
+  {% endif %}
+</div>
+{% endblock %}

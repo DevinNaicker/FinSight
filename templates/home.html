@@ -1,0 +1,162 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<style>
+  input::placeholder {
+    color: #ffffff !important;
+  }
+
+  .btn-search {
+    transition: background-color 0.3s ease, transform 0.2s ease;
+  }
+
+  .btn-search:hover {
+    background-color: #168a8d !important;
+    transform: scale(1.05);
+  }
+
+  .news-item {
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+
+  .news-item:hover {
+    background-color: #1cabb0 !important;
+    color: white !important;
+  }
+
+  .stock-card {
+    background-color: #051d40; /* Navy blue */
+    border: 2px solid #bebec0;  /* Silver border */
+    border-radius: 10px;
+    padding: 1rem;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 100px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .stock-card:hover {
+    transform: scale(1.03);
+    box-shadow: 0 0.75rem 1.5rem rgba(28, 171, 176, 0.4);
+  }
+
+  .stock-left {
+    flex: 1;
+  }
+
+  .stock-middle {
+    flex: 1;
+    text-align: right;
+    margin-right: 2.5rem;
+  }
+
+  .stock-title {
+    color: #ffffff;
+    font-weight: 600;
+    font-size: 1.25rem;
+    margin-bottom: 0.2rem;
+  }
+
+  .company-name {
+    color: #bebec0;
+    font-size: 0.9rem;
+    margin-bottom: 0;
+  }
+
+  .stock-price {
+    color: #ffffff;
+    font-size: 1.1rem;
+    font-weight: 500;
+    margin-bottom: 0.3rem;
+  }
+
+  .stock-change {
+    font-size: 1.1rem;
+    font-weight: 500;
+    margin-bottom: 0;
+  }
+
+  .stock-change.positive {
+    color: green;
+  }
+
+  .stock-change.negative {
+    color: red;
+  }
+
+  .arrow {
+    position: absolute;
+    right: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 2rem;
+    font-weight: bold;
+  }
+</style>
+
+<div class="container my-5">
+  <!-- Search Section -->
+  <div class="text-center mb-4">
+    <h1 class="text-white">Track Your Stocks Instantly</h1>
+    <form method="post" action="/stocks/">
+      {% csrf_token %}
+      <div class="input-group mt-3 w-50 mx-auto">
+        <input
+          type="text"
+          name="ticker"
+          class="form-control"
+          placeholder="Enter stock ticker (e.g., AAPL)"
+          required
+          style="background-color: #051d40 !important; color: #ffffff !important; border: 1px solid #1cabb0 !important; caret-color: white !important;">
+        <button
+          type="submit"
+          class="btn btn-search"
+          style="background-color: #1cabb0; color: white; border: none;">
+          Search
+        </button>
+      </div>
+    </form>
+  </div>
+
+  <!-- Popular Stocks -->
+  <h3 class="mb-3 text-white">Popular Stocks</h3>
+  <div class="row row-cols-1 row-cols-md-3 g-4">
+    {% for ticker, stock in popular_stocks.items %}
+      <div class="col">
+        <div class="card stock-card shadow-sm">
+          <div class="stock-left">
+            <h5 class="stock-title">{{ ticker }}</h5>
+            <p class="company-name">{{ stock.name }}</p>
+          </div>
+          <div class="stock-middle">
+            <p class="stock-price">${{ stock.price }}</p>
+            <p class="stock-change {% if stock.change >= 0 %}positive{% else %}negative{% endif %}">
+              {% if stock.change >= 0 %}+{% else %}-{% endif %}${{ stock.change|floatformat:2 }}
+              ({{ stock.percent|floatformat:2 }}%)
+            </p>
+          </div>
+          <div class="arrow {% if stock.change >= 0 %}text-success{% else %}text-danger{% endif %}">
+            {% if stock.change >= 0 %}↑{% else %}↓{% endif %}
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+
+  <!-- News Feed -->
+  <h3 class="mt-5 mb-3 text-white">Latest Financial News</h3>
+  <div style="background-color: #bebec0; border: 2px solid #1cabb0; border-radius: 5px;">
+    {% for article in news %}
+      <a
+        href="{{ article.url }}"
+        class="d-block px-3 py-2 text-decoration-none news-item"
+        style="background-color: #bebec0; color: black; border-bottom: 1px solid #1cabb0;">
+        {{ article.title }}
+      </a>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}
