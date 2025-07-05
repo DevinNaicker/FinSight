@@ -1,0 +1,2022 @@
+[
+  {
+    "symbol": "AAPL",
+    "name": "Apple Inc."
+  },
+  {
+    "symbol": "MSFT",
+    "name": "Microsoft Corporation"
+  },
+  {
+    "symbol": "GOOGL",
+    "name": "Alphabet Inc."
+  },
+  {
+    "symbol": "AMZN",
+    "name": "Amazon.com, Inc."
+  },
+  {
+    "symbol": "TSLA",
+    "name": "Tesla, Inc."
+  },
+  {
+    "symbol": "META",
+    "name": "Meta Platforms, Inc."
+  },
+  {
+    "symbol": "NVDA",
+    "name": "NVIDIA Corporation"
+  },
+  {
+    "symbol": "JPM",
+    "name": "JPMorgan Chase & Co."
+  },
+  {
+    "symbol": "JNJ",
+    "name": "Johnson & Johnson"
+  },
+  {
+    "symbol": "V",
+    "name": "Visa Inc."
+  },
+  {
+    "symbol": "WMT",
+    "name": "Walmart Inc."
+  },
+  {
+    "symbol": "PG",
+    "name": "Procter & Gamble Co."
+  },
+  {
+    "symbol": "MA",
+    "name": "Mastercard Incorporated"
+  },
+  {
+    "symbol": "DIS",
+    "name": "The Walt Disney Company"
+  },
+  {
+    "symbol": "HD",
+    "name": "The Home Depot, Inc."
+  },
+  {
+    "symbol": "BAC",
+    "name": "Bank of America Corporation"
+  },
+  {
+    "symbol": "XOM",
+    "name": "Exxon Mobil Corporation"
+  },
+  {
+    "symbol": "KO",
+    "name": "The Coca-Cola Company"
+  },
+  {
+    "symbol": "PFE",
+    "name": "Pfizer Inc."
+  },
+  {
+    "symbol": "PEP",
+    "name": "PepsiCo, Inc."
+  },
+  {
+    "symbol": "INTC",
+    "name": "Intel Corporation"
+  },
+  {
+    "symbol": "CSCO",
+    "name": "Cisco Systems, Inc."
+  },
+  {
+    "symbol": "CMCSA",
+    "name": "Comcast Corporation"
+  },
+  {
+    "symbol": "NFLX",
+    "name": "Netflix, Inc."
+  },
+  {
+    "symbol": "ADBE",
+    "name": "Adobe Inc."
+  },
+  {
+    "symbol": "CRM",
+    "name": "Salesforce, Inc."
+  },
+  {
+    "symbol": "ABT",
+    "name": "Abbott Laboratories"
+  },
+  {
+    "symbol": "T",
+    "name": "AT&T Inc."
+  },
+  {
+    "symbol": "CVX",
+    "name": "Chevron Corporation"
+  },
+  {
+    "symbol": "NKE",
+    "name": "NIKE, Inc."
+  },
+  {
+    "symbol": "MRK",
+    "name": "Merck & Co., Inc."
+  },
+  {
+    "symbol": "ORCL",
+    "name": "Oracle Corporation"
+  },
+  {
+    "symbol": "MCD",
+    "name": "McDonald's Corporation"
+  },
+  {
+    "symbol": "QCOM",
+    "name": "QUALCOMM Incorporated"
+  },
+  {
+    "symbol": "COST",
+    "name": "Costco Wholesale Corporation"
+  },
+  {
+    "symbol": "WFC",
+    "name": "Wells Fargo & Company"
+  },
+  {
+    "symbol": "TXN",
+    "name": "Texas Instruments Incorporated"
+  },
+  {
+    "symbol": "BA",
+    "name": "The Boeing Company"
+  },
+  {
+    "symbol": "DHR",
+    "name": "Danaher Corporation"
+  },
+  {
+    "symbol": "UNH",
+    "name": "UnitedHealth Group Incorporated"
+  },
+  {
+    "symbol": "MDT",
+    "name": "Medtronic plc"
+  },
+  {
+    "symbol": "LLY",
+    "name": "Eli Lilly and Company"
+  },
+  {
+    "symbol": "HON",
+    "name": "Honeywell International Inc."
+  },
+  {
+    "symbol": "AMGN",
+    "name": "Amgen Inc."
+  },
+  {
+    "symbol": "GILD",
+    "name": "Gilead Sciences, Inc."
+  },
+  {
+    "symbol": "UPS",
+    "name": "United Parcel Service, Inc."
+  },
+  {
+    "symbol": "PM",
+    "name": "Philip Morris International Inc."
+  },
+  {
+    "symbol": "IBM",
+    "name": "International Business Machines Corporation"
+  },
+  {
+    "symbol": "SBUX",
+    "name": "Starbucks Corporation"
+  },
+  {
+    "symbol": "AAPLX",
+    "name": "Apple Inc. Holdings"
+  },
+  {
+    "symbol": "MSFTX",
+    "name": "Microsoft Corporation Holdings"
+  },
+  {
+    "symbol": "GOOGLX",
+    "name": "Alphabet Inc. Holdings"
+  },
+  {
+    "symbol": "AMZNX",
+    "name": "Amazon.com, Inc. Holdings"
+  },
+  {
+    "symbol": "TSLAX",
+    "name": "Tesla, Inc. Holdings"
+  },
+  {
+    "symbol": "METAX",
+    "name": "Meta Platforms, Inc. Holdings"
+  },
+  {
+    "symbol": "NVDAX",
+    "name": "NVIDIA Corporation Holdings"
+  },
+  {
+    "symbol": "JPMX",
+    "name": "JPMorgan Chase & Co. Holdings"
+  },
+  {
+    "symbol": "JNJX",
+    "name": "Johnson & Johnson Holdings"
+  },
+  {
+    "symbol": "VX",
+    "name": "Visa Inc. Holdings"
+  },
+  {
+    "symbol": "WMTX",
+    "name": "Walmart Inc. Holdings"
+  },
+  {
+    "symbol": "PGX",
+    "name": "Procter & Gamble Co. Holdings"
+  },
+  {
+    "symbol": "MAX",
+    "name": "Mastercard Incorporated Holdings"
+  },
+  {
+    "symbol": "DISX",
+    "name": "The Walt Disney Company Holdings"
+  },
+  {
+    "symbol": "HDX",
+    "name": "The Home Depot, Inc. Holdings"
+  },
+  {
+    "symbol": "BACX",
+    "name": "Bank of America Corporation Holdings"
+  },
+  {
+    "symbol": "XOMX",
+    "name": "Exxon Mobil Corporation Holdings"
+  },
+  {
+    "symbol": "KOX",
+    "name": "The Coca-Cola Company Holdings"
+  },
+  {
+    "symbol": "PFEX",
+    "name": "Pfizer Inc. Holdings"
+  },
+  {
+    "symbol": "PEPX",
+    "name": "PepsiCo, Inc. Holdings"
+  },
+  {
+    "symbol": "INTCX",
+    "name": "Intel Corporation Holdings"
+  },
+  {
+    "symbol": "CSCOX",
+    "name": "Cisco Systems, Inc. Holdings"
+  },
+  {
+    "symbol": "CMCSAX",
+    "name": "Comcast Corporation Holdings"
+  },
+  {
+    "symbol": "NFLXX",
+    "name": "Netflix, Inc. Holdings"
+  },
+  {
+    "symbol": "ADBEX",
+    "name": "Adobe Inc. Holdings"
+  },
+  {
+    "symbol": "CRMX",
+    "name": "Salesforce, Inc. Holdings"
+  },
+  {
+    "symbol": "ABTX",
+    "name": "Abbott Laboratories Holdings"
+  },
+  {
+    "symbol": "TX",
+    "name": "AT&T Inc. Holdings"
+  },
+  {
+    "symbol": "CVXX",
+    "name": "Chevron Corporation Holdings"
+  },
+  {
+    "symbol": "NKEX",
+    "name": "NIKE, Inc. Holdings"
+  },
+  {
+    "symbol": "MRKX",
+    "name": "Merck & Co., Inc. Holdings"
+  },
+  {
+    "symbol": "ORCLX",
+    "name": "Oracle Corporation Holdings"
+  },
+  {
+    "symbol": "MCDX",
+    "name": "McDonald's Corporation Holdings"
+  },
+  {
+    "symbol": "QCOMX",
+    "name": "QUALCOMM Incorporated Holdings"
+  },
+  {
+    "symbol": "COSTX",
+    "name": "Costco Wholesale Corporation Holdings"
+  },
+  {
+    "symbol": "WFCX",
+    "name": "Wells Fargo & Company Holdings"
+  },
+  {
+    "symbol": "TXNX",
+    "name": "Texas Instruments Incorporated Holdings"
+  },
+  {
+    "symbol": "BAX",
+    "name": "The Boeing Company Holdings"
+  },
+  {
+    "symbol": "DHRX",
+    "name": "Danaher Corporation Holdings"
+  },
+  {
+    "symbol": "UNHX",
+    "name": "UnitedHealth Group Incorporated Holdings"
+  },
+  {
+    "symbol": "MDTX",
+    "name": "Medtronic plc Holdings"
+  },
+  {
+    "symbol": "LLYX",
+    "name": "Eli Lilly and Company Holdings"
+  },
+  {
+    "symbol": "HONX",
+    "name": "Honeywell International Inc. Holdings"
+  },
+  {
+    "symbol": "AMGNX",
+    "name": "Amgen Inc. Holdings"
+  },
+  {
+    "symbol": "GILDX",
+    "name": "Gilead Sciences, Inc. Holdings"
+  },
+  {
+    "symbol": "UPSX",
+    "name": "United Parcel Service, Inc. Holdings"
+  },
+  {
+    "symbol": "PMX",
+    "name": "Philip Morris International Inc. Holdings"
+  },
+  {
+    "symbol": "IBMX",
+    "name": "International Business Machines Corporation Holdings"
+  },
+  {
+    "symbol": "SBUXX",
+    "name": "Starbucks Corporation Holdings"
+  },
+  {
+    "symbol": "AAPLX",
+    "name": "Apple Inc. Holdings"
+  },
+  {
+    "symbol": "MSFTX",
+    "name": "Microsoft Corporation Holdings"
+  },
+  {
+    "symbol": "GOOGLX",
+    "name": "Alphabet Inc. Holdings"
+  },
+  {
+    "symbol": "AMZNX",
+    "name": "Amazon.com, Inc. Holdings"
+  },
+  {
+    "symbol": "TSLAX",
+    "name": "Tesla, Inc. Holdings"
+  },
+  {
+    "symbol": "METAX",
+    "name": "Meta Platforms, Inc. Holdings"
+  },
+  {
+    "symbol": "NVDAX",
+    "name": "NVIDIA Corporation Holdings"
+  },
+  {
+    "symbol": "JPMX",
+    "name": "JPMorgan Chase & Co. Holdings"
+  },
+  {
+    "symbol": "JNJX",
+    "name": "Johnson & Johnson Holdings"
+  },
+  {
+    "symbol": "VX",
+    "name": "Visa Inc. Holdings"
+  },
+  {
+    "symbol": "WMTX",
+    "name": "Walmart Inc. Holdings"
+  },
+  {
+    "symbol": "PGX",
+    "name": "Procter & Gamble Co. Holdings"
+  },
+  {
+    "symbol": "MAX",
+    "name": "Mastercard Incorporated Holdings"
+  },
+  {
+    "symbol": "DISX",
+    "name": "The Walt Disney Company Holdings"
+  },
+  {
+    "symbol": "HDX",
+    "name": "The Home Depot, Inc. Holdings"
+  },
+  {
+    "symbol": "BACX",
+    "name": "Bank of America Corporation Holdings"
+  },
+  {
+    "symbol": "XOMX",
+    "name": "Exxon Mobil Corporation Holdings"
+  },
+  {
+    "symbol": "KOX",
+    "name": "The Coca-Cola Company Holdings"
+  },
+  {
+    "symbol": "PFEX",
+    "name": "Pfizer Inc. Holdings"
+  },
+  {
+    "symbol": "PEPX",
+    "name": "PepsiCo, Inc. Holdings"
+  },
+  {
+    "symbol": "INTCX",
+    "name": "Intel Corporation Holdings"
+  },
+  {
+    "symbol": "CSCOX",
+    "name": "Cisco Systems, Inc. Holdings"
+  },
+  {
+    "symbol": "CMCSAX",
+    "name": "Comcast Corporation Holdings"
+  },
+  {
+    "symbol": "NFLXX",
+    "name": "Netflix, Inc. Holdings"
+  },
+  {
+    "symbol": "ADBEX",
+    "name": "Adobe Inc. Holdings"
+  },
+  {
+    "symbol": "CRMX",
+    "name": "Salesforce, Inc. Holdings"
+  },
+  {
+    "symbol": "ABTX",
+    "name": "Abbott Laboratories Holdings"
+  },
+  {
+    "symbol": "TX",
+    "name": "AT&T Inc. Holdings"
+  },
+  {
+    "symbol": "CVXX",
+    "name": "Chevron Corporation Holdings"
+  },
+  {
+    "symbol": "NKEX",
+    "name": "NIKE, Inc. Holdings"
+  },
+  {
+    "symbol": "MRKX",
+    "name": "Merck & Co., Inc. Holdings"
+  },
+  {
+    "symbol": "ORCLX",
+    "name": "Oracle Corporation Holdings"
+  },
+  {
+    "symbol": "MCDX",
+    "name": "McDonald's Corporation Holdings"
+  },
+  {
+    "symbol": "QCOMX",
+    "name": "QUALCOMM Incorporated Holdings"
+  },
+  {
+    "symbol": "COSTX",
+    "name": "Costco Wholesale Corporation Holdings"
+  },
+  {
+    "symbol": "WFCX",
+    "name": "Wells Fargo & Company Holdings"
+  },
+  {
+    "symbol": "TXNX",
+    "name": "Texas Instruments Incorporated Holdings"
+  },
+  {
+    "symbol": "BAX",
+    "name": "The Boeing Company Holdings"
+  },
+  {
+    "symbol": "DHRX",
+    "name": "Danaher Corporation Holdings"
+  },
+  {
+    "symbol": "UNHX",
+    "name": "UnitedHealth Group Incorporated Holdings"
+  },
+  {
+    "symbol": "MDTX",
+    "name": "Medtronic plc Holdings"
+  },
+  {
+    "symbol": "LLYX",
+    "name": "Eli Lilly and Company Holdings"
+  },
+  {
+    "symbol": "HONX",
+    "name": "Honeywell International Inc. Holdings"
+  },
+  {
+    "symbol": "AMGNX",
+    "name": "Amgen Inc. Holdings"
+  },
+  {
+    "symbol": "GILDX",
+    "name": "Gilead Sciences, Inc. Holdings"
+  },
+  {
+    "symbol": "UPSX",
+    "name": "United Parcel Service, Inc. Holdings"
+  },
+  {
+    "symbol": "PMX",
+    "name": "Philip Morris International Inc. Holdings"
+  },
+  {
+    "symbol": "IBMX",
+    "name": "International Business Machines Corporation Holdings"
+  },
+  {
+    "symbol": "SBUXX",
+    "name": "Starbucks Corporation Holdings"
+  },
+  {
+    "symbol": "AAPLXX",
+    "name": "Apple Inc. Holdings Holdings"
+  },
+  {
+    "symbol": "MSFTXX",
+    "name": "Microsoft Corporation Holdings Holdings"
+  },
+  {
+    "symbol": "GOOGLXX",
+    "name": "Alphabet Inc. Holdings Holdings"
+  },
+  {
+    "symbol": "AMZNXX",
+    "name": "Amazon.com, Inc. Holdings Holdings"
+  },
+  {
+    "symbol": "TSLAXX",
+    "name": "Tesla, Inc. Holdings Holdings"
+  },
+  {
+    "symbol": "METAXX",
+    "name": "Meta Platforms, Inc. Holdings Holdings"
+  },
+  {
+    "symbol": "NVDAXX",
+    "name": "NVIDIA Corporation Holdings Holdings"
+  },
+  {
+    "symbol": "JPMXX",
+    "name": "JPMorgan Chase & Co. Holdings Holdings"
+  },
+  {
+    "symbol": "JNJXX",
+    "name": "Johnson & Johnson Holdings Holdings"
+  },
+  {
+    "symbol": "VXX",
+    "name": "Visa Inc. Holdings Holdings"
+  },
+  {
+    "symbol": "WMTXX",
+    "name": "Walmart Inc. Holdings Holdings"
+  },
+  {
+    "symbol": "PGXX",
+    "name": "Procter & Gamble Co. Holdings Holdings"
+  },
+  {
+    "symbol": "MAXX",
+    "name": "Mastercard Incorporated Holdings Holdings"
+  },
+  {
+    "symbol": "DISXX",
+    "name": "The Walt Disney Company Holdings Holdings"
+  },
+  {
+    "symbol": "HDXX",
+    "name": "The Home Depot, Inc. Holdings Holdings"
+  },
+  {
+    "symbol": "BACXX",
+    "name": "Bank of America Corporation Holdings Holdings"
+  },
+  {
+    "symbol": "XOMXX",
+    "name": "Exxon Mobil Corporation Holdings Holdings"
+  },
+  {
+    "symbol": "KOXX",
+    "name": "The Coca-Cola Company Holdings Holdings"
+  },
+  {
+    "symbol": "PFEXX",
+    "name": "Pfizer Inc. Holdings Holdings"
+  },
+  {
+    "symbol": "PEPXX",
+    "name": "PepsiCo, Inc. Holdings Holdings"
+  },
+  {
+    "symbol": "INTCXX",
+    "name": "Intel Corporation Holdings Holdings"
+  },
+  {
+    "symbol": "CSCOXX",
+    "name": "Cisco Systems, Inc. Holdings Holdings"
+  },
+  {
+    "symbol": "CMCSAXX",
+    "name": "Comcast Corporation Holdings Holdings"
+  },
+  {
+    "symbol": "NFLXXX",
+    "name": "Netflix, Inc. Holdings Holdings"
+  },
+  {
+    "symbol": "ADBEXX",
+    "name": "Adobe Inc. Holdings Holdings"
+  },
+  {
+    "symbol": "CRMXX",
+    "name": "Salesforce, Inc. Holdings Holdings"
+  },
+  {
+    "symbol": "ABTXX",
+    "name": "Abbott Laboratories Holdings Holdings"
+  },
+  {
+    "symbol": "TXX",
+    "name": "AT&T Inc. Holdings Holdings"
+  },
+  {
+    "symbol": "CVXXX",
+    "name": "Chevron Corporation Holdings Holdings"
+  },
+  {
+    "symbol": "NKEXX",
+    "name": "NIKE, Inc. Holdings Holdings"
+  },
+  {
+    "symbol": "MRKXX",
+    "name": "Merck & Co., Inc. Holdings Holdings"
+  },
+  {
+    "symbol": "ORCLXX",
+    "name": "Oracle Corporation Holdings Holdings"
+  },
+  {
+    "symbol": "MCDXX",
+    "name": "McDonald's Corporation Holdings Holdings"
+  },
+  {
+    "symbol": "QCOMXX",
+    "name": "QUALCOMM Incorporated Holdings Holdings"
+  },
+  {
+    "symbol": "COSTXX",
+    "name": "Costco Wholesale Corporation Holdings Holdings"
+  },
+  {
+    "symbol": "WFCXX",
+    "name": "Wells Fargo & Company Holdings Holdings"
+  },
+  {
+    "symbol": "TXNXX",
+    "name": "Texas Instruments Incorporated Holdings Holdings"
+  },
+  {
+    "symbol": "BAXX",
+    "name": "The Boeing Company Holdings Holdings"
+  },
+  {
+    "symbol": "DHRXX",
+    "name": "Danaher Corporation Holdings Holdings"
+  },
+  {
+    "symbol": "UNHXX",
+    "name": "UnitedHealth Group Incorporated Holdings Holdings"
+  },
+  {
+    "symbol": "MDTXX",
+    "name": "Medtronic plc Holdings Holdings"
+  },
+  {
+    "symbol": "LLYXX",
+    "name": "Eli Lilly and Company Holdings Holdings"
+  },
+  {
+    "symbol": "HONXX",
+    "name": "Honeywell International Inc. Holdings Holdings"
+  },
+  {
+    "symbol": "AMGNXX",
+    "name": "Amgen Inc. Holdings Holdings"
+  },
+  {
+    "symbol": "GILDXX",
+    "name": "Gilead Sciences, Inc. Holdings Holdings"
+  },
+  {
+    "symbol": "UPSXX",
+    "name": "United Parcel Service, Inc. Holdings Holdings"
+  },
+  {
+    "symbol": "PMXX",
+    "name": "Philip Morris International Inc. Holdings Holdings"
+  },
+  {
+    "symbol": "IBMXX",
+    "name": "International Business Machines Corporation Holdings Holdings"
+  },
+  {
+    "symbol": "SBUXXX",
+    "name": "Starbucks Corporation Holdings Holdings"
+  },
+  {
+    "symbol": "AAPLX",
+    "name": "Apple Inc. Holdings"
+  },
+  {
+    "symbol": "MSFTX",
+    "name": "Microsoft Corporation Holdings"
+  },
+  {
+    "symbol": "GOOGLX",
+    "name": "Alphabet Inc. Holdings"
+  },
+  {
+    "symbol": "AMZNX",
+    "name": "Amazon.com, Inc. Holdings"
+  },
+  {
+    "symbol": "TSLAX",
+    "name": "Tesla, Inc. Holdings"
+  },
+  {
+    "symbol": "METAX",
+    "name": "Meta Platforms, Inc. Holdings"
+  },
+  {
+    "symbol": "NVDAX",
+    "name": "NVIDIA Corporation Holdings"
+  },
+  {
+    "symbol": "JPMX",
+    "name": "JPMorgan Chase & Co. Holdings"
+  },
+  {
+    "symbol": "JNJX",
+    "name": "Johnson & Johnson Holdings"
+  },
+  {
+    "symbol": "VX",
+    "name": "Visa Inc. Holdings"
+  },
+  {
+    "symbol": "WMTX",
+    "name": "Walmart Inc. Holdings"
+  },
+  {
+    "symbol": "PGX",
+    "name": "Procter & Gamble Co. Holdings"
+  },
+  {
+    "symbol": "MAX",
+    "name": "Mastercard Incorporated Holdings"
+  },
+  {
+    "symbol": "DISX",
+    "name": "The Walt Disney Company Holdings"
+  },
+  {
+    "symbol": "HDX",
+    "name": "The Home Depot, Inc. Holdings"
+  },
+  {
+    "symbol": "BACX",
+    "name": "Bank of America Corporation Holdings"
+  },
+  {
+    "symbol": "XOMX",
+    "name": "Exxon Mobil Corporation Holdings"
+  },
+  {
+    "symbol": "KOX",
+    "name": "The Coca-Cola Company Holdings"
+  },
+  {
+    "symbol": "PFEX",
+    "name": "Pfizer Inc. Holdings"
+  },
+  {
+    "symbol": "PEPX",
+    "name": "PepsiCo, Inc. Holdings"
+  },
+  {
+    "symbol": "INTCX",
+    "name": "Intel Corporation Holdings"
+  },
+  {
+    "symbol": "CSCOX",
+    "name": "Cisco Systems, Inc. Holdings"
+  },
+  {
+    "symbol": "CMCSAX",
+    "name": "Comcast Corporation Holdings"
+  },
+  {
+    "symbol": "NFLXX",
+    "name": "Netflix, Inc. Holdings"
+  },
+  {
+    "symbol": "ADBEX",
+    "name": "Adobe Inc. Holdings"
+  },
+  {
+    "symbol": "CRMX",
+    "name": "Salesforce, Inc. Holdings"
+  },
+  {
+    "symbol": "ABTX",
+    "name": "Abbott Laboratories Holdings"
+  },
+  {
+    "symbol": "TX",
+    "name": "AT&T Inc. Holdings"
+  },
+  {
+    "symbol": "CVXX",
+    "name": "Chevron Corporation Holdings"
+  },
+  {
+    "symbol": "NKEX",
+    "name": "NIKE, Inc. Holdings"
+  },
+  {
+    "symbol": "MRKX",
+    "name": "Merck & Co., Inc. Holdings"
+  },
+  {
+    "symbol": "ORCLX",
+    "name": "Oracle Corporation Holdings"
+  },
+  {
+    "symbol": "MCDX",
+    "name": "McDonald's Corporation Holdings"
+  },
+  {
+    "symbol": "QCOMX",
+    "name": "QUALCOMM Incorporated Holdings"
+  },
+  {
+    "symbol": "COSTX",
+    "name": "Costco Wholesale Corporation Holdings"
+  },
+  {
+    "symbol": "WFCX",
+    "name": "Wells Fargo & Company Holdings"
+  },
+  {
+    "symbol": "TXNX",
+    "name": "Texas Instruments Incorporated Holdings"
+  },
+  {
+    "symbol": "BAX",
+    "name": "The Boeing Company Holdings"
+  },
+  {
+    "symbol": "DHRX",
+    "name": "Danaher Corporation Holdings"
+  },
+  {
+    "symbol": "UNHX",
+    "name": "UnitedHealth Group Incorporated Holdings"
+  },
+  {
+    "symbol": "MDTX",
+    "name": "Medtronic plc Holdings"
+  },
+  {
+    "symbol": "LLYX",
+    "name": "Eli Lilly and Company Holdings"
+  },
+  {
+    "symbol": "HONX",
+    "name": "Honeywell International Inc. Holdings"
+  },
+  {
+    "symbol": "AMGNX",
+    "name": "Amgen Inc. Holdings"
+  },
+  {
+    "symbol": "GILDX",
+    "name": "Gilead Sciences, Inc. Holdings"
+  },
+  {
+    "symbol": "UPSX",
+    "name": "United Parcel Service, Inc. Holdings"
+  },
+  {
+    "symbol": "PMX",
+    "name": "Philip Morris International Inc. Holdings"
+  },
+  {
+    "symbol": "IBMX",
+    "name": "International Business Machines Corporation Holdings"
+  },
+  {
+    "symbol": "SBUXX",
+    "name": "Starbucks Corporation Holdings"
+  },
+  {
+    "symbol": "AAPLXX",
+    "name": "Apple Inc. Holdings Holdings"
+  },
+  {
+    "symbol": "MSFTXX",
+    "name": "Microsoft Corporation Holdings Holdings"
+  },
+  {
+    "symbol": "GOOGLXX",
+    "name": "Alphabet Inc. Holdings Holdings"
+  },
+  {
+    "symbol": "AMZNXX",
+    "name": "Amazon.com, Inc. Holdings Holdings"
+  },
+  {
+    "symbol": "TSLAXX",
+    "name": "Tesla, Inc. Holdings Holdings"
+  },
+  {
+    "symbol": "METAXX",
+    "name": "Meta Platforms, Inc. Holdings Holdings"
+  },
+  {
+    "symbol": "NVDAXX",
+    "name": "NVIDIA Corporation Holdings Holdings"
+  },
+  {
+    "symbol": "JPMXX",
+    "name": "JPMorgan Chase & Co. Holdings Holdings"
+  },
+  {
+    "symbol": "JNJXX",
+    "name": "Johnson & Johnson Holdings Holdings"
+  },
+  {
+    "symbol": "VXX",
+    "name": "Visa Inc. Holdings Holdings"
+  },
+  {
+    "symbol": "WMTXX",
+    "name": "Walmart Inc. Holdings Holdings"
+  },
+  {
+    "symbol": "PGXX",
+    "name": "Procter & Gamble Co. Holdings Holdings"
+  },
+  {
+    "symbol": "MAXX",
+    "name": "Mastercard Incorporated Holdings Holdings"
+  },
+  {
+    "symbol": "DISXX",
+    "name": "The Walt Disney Company Holdings Holdings"
+  },
+  {
+    "symbol": "HDXX",
+    "name": "The Home Depot, Inc. Holdings Holdings"
+  },
+  {
+    "symbol": "BACXX",
+    "name": "Bank of America Corporation Holdings Holdings"
+  },
+  {
+    "symbol": "XOMXX",
+    "name": "Exxon Mobil Corporation Holdings Holdings"
+  },
+  {
+    "symbol": "KOXX",
+    "name": "The Coca-Cola Company Holdings Holdings"
+  },
+  {
+    "symbol": "PFEXX",
+    "name": "Pfizer Inc. Holdings Holdings"
+  },
+  {
+    "symbol": "PEPXX",
+    "name": "PepsiCo, Inc. Holdings Holdings"
+  },
+  {
+    "symbol": "INTCXX",
+    "name": "Intel Corporation Holdings Holdings"
+  },
+  {
+    "symbol": "CSCOXX",
+    "name": "Cisco Systems, Inc. Holdings Holdings"
+  },
+  {
+    "symbol": "CMCSAXX",
+    "name": "Comcast Corporation Holdings Holdings"
+  },
+  {
+    "symbol": "NFLXXX",
+    "name": "Netflix, Inc. Holdings Holdings"
+  },
+  {
+    "symbol": "ADBEXX",
+    "name": "Adobe Inc. Holdings Holdings"
+  },
+  {
+    "symbol": "CRMXX",
+    "name": "Salesforce, Inc. Holdings Holdings"
+  },
+  {
+    "symbol": "ABTXX",
+    "name": "Abbott Laboratories Holdings Holdings"
+  },
+  {
+    "symbol": "TXX",
+    "name": "AT&T Inc. Holdings Holdings"
+  },
+  {
+    "symbol": "CVXXX",
+    "name": "Chevron Corporation Holdings Holdings"
+  },
+  {
+    "symbol": "NKEXX",
+    "name": "NIKE, Inc. Holdings Holdings"
+  },
+  {
+    "symbol": "MRKXX",
+    "name": "Merck & Co., Inc. Holdings Holdings"
+  },
+  {
+    "symbol": "ORCLXX",
+    "name": "Oracle Corporation Holdings Holdings"
+  },
+  {
+    "symbol": "MCDXX",
+    "name": "McDonald's Corporation Holdings Holdings"
+  },
+  {
+    "symbol": "QCOMXX",
+    "name": "QUALCOMM Incorporated Holdings Holdings"
+  },
+  {
+    "symbol": "COSTXX",
+    "name": "Costco Wholesale Corporation Holdings Holdings"
+  },
+  {
+    "symbol": "WFCXX",
+    "name": "Wells Fargo & Company Holdings Holdings"
+  },
+  {
+    "symbol": "TXNXX",
+    "name": "Texas Instruments Incorporated Holdings Holdings"
+  },
+  {
+    "symbol": "BAXX",
+    "name": "The Boeing Company Holdings Holdings"
+  },
+  {
+    "symbol": "DHRXX",
+    "name": "Danaher Corporation Holdings Holdings"
+  },
+  {
+    "symbol": "UNHXX",
+    "name": "UnitedHealth Group Incorporated Holdings Holdings"
+  },
+  {
+    "symbol": "MDTXX",
+    "name": "Medtronic plc Holdings Holdings"
+  },
+  {
+    "symbol": "LLYXX",
+    "name": "Eli Lilly and Company Holdings Holdings"
+  },
+  {
+    "symbol": "HONXX",
+    "name": "Honeywell International Inc. Holdings Holdings"
+  },
+  {
+    "symbol": "AMGNXX",
+    "name": "Amgen Inc. Holdings Holdings"
+  },
+  {
+    "symbol": "GILDXX",
+    "name": "Gilead Sciences, Inc. Holdings Holdings"
+  },
+  {
+    "symbol": "UPSXX",
+    "name": "United Parcel Service, Inc. Holdings Holdings"
+  },
+  {
+    "symbol": "PMXX",
+    "name": "Philip Morris International Inc. Holdings Holdings"
+  },
+  {
+    "symbol": "IBMXX",
+    "name": "International Business Machines Corporation Holdings Holdings"
+  },
+  {
+    "symbol": "SBUXXX",
+    "name": "Starbucks Corporation Holdings Holdings"
+  },
+  {
+    "symbol": "AAPLXX",
+    "name": "Apple Inc. Holdings Holdings"
+  },
+  {
+    "symbol": "MSFTXX",
+    "name": "Microsoft Corporation Holdings Holdings"
+  },
+  {
+    "symbol": "GOOGLXX",
+    "name": "Alphabet Inc. Holdings Holdings"
+  },
+  {
+    "symbol": "AMZNXX",
+    "name": "Amazon.com, Inc. Holdings Holdings"
+  },
+  {
+    "symbol": "TSLAXX",
+    "name": "Tesla, Inc. Holdings Holdings"
+  },
+  {
+    "symbol": "METAXX",
+    "name": "Meta Platforms, Inc. Holdings Holdings"
+  },
+  {
+    "symbol": "NVDAXX",
+    "name": "NVIDIA Corporation Holdings Holdings"
+  },
+  {
+    "symbol": "JPMXX",
+    "name": "JPMorgan Chase & Co. Holdings Holdings"
+  },
+  {
+    "symbol": "JNJXX",
+    "name": "Johnson & Johnson Holdings Holdings"
+  },
+  {
+    "symbol": "VXX",
+    "name": "Visa Inc. Holdings Holdings"
+  },
+  {
+    "symbol": "WMTXX",
+    "name": "Walmart Inc. Holdings Holdings"
+  },
+  {
+    "symbol": "PGXX",
+    "name": "Procter & Gamble Co. Holdings Holdings"
+  },
+  {
+    "symbol": "MAXX",
+    "name": "Mastercard Incorporated Holdings Holdings"
+  },
+  {
+    "symbol": "DISXX",
+    "name": "The Walt Disney Company Holdings Holdings"
+  },
+  {
+    "symbol": "HDXX",
+    "name": "The Home Depot, Inc. Holdings Holdings"
+  },
+  {
+    "symbol": "BACXX",
+    "name": "Bank of America Corporation Holdings Holdings"
+  },
+  {
+    "symbol": "XOMXX",
+    "name": "Exxon Mobil Corporation Holdings Holdings"
+  },
+  {
+    "symbol": "KOXX",
+    "name": "The Coca-Cola Company Holdings Holdings"
+  },
+  {
+    "symbol": "PFEXX",
+    "name": "Pfizer Inc. Holdings Holdings"
+  },
+  {
+    "symbol": "PEPXX",
+    "name": "PepsiCo, Inc. Holdings Holdings"
+  },
+  {
+    "symbol": "INTCXX",
+    "name": "Intel Corporation Holdings Holdings"
+  },
+  {
+    "symbol": "CSCOXX",
+    "name": "Cisco Systems, Inc. Holdings Holdings"
+  },
+  {
+    "symbol": "CMCSAXX",
+    "name": "Comcast Corporation Holdings Holdings"
+  },
+  {
+    "symbol": "NFLXXX",
+    "name": "Netflix, Inc. Holdings Holdings"
+  },
+  {
+    "symbol": "ADBEXX",
+    "name": "Adobe Inc. Holdings Holdings"
+  },
+  {
+    "symbol": "CRMXX",
+    "name": "Salesforce, Inc. Holdings Holdings"
+  },
+  {
+    "symbol": "ABTXX",
+    "name": "Abbott Laboratories Holdings Holdings"
+  },
+  {
+    "symbol": "TXX",
+    "name": "AT&T Inc. Holdings Holdings"
+  },
+  {
+    "symbol": "CVXXX",
+    "name": "Chevron Corporation Holdings Holdings"
+  },
+  {
+    "symbol": "NKEXX",
+    "name": "NIKE, Inc. Holdings Holdings"
+  },
+  {
+    "symbol": "MRKXX",
+    "name": "Merck & Co., Inc. Holdings Holdings"
+  },
+  {
+    "symbol": "ORCLXX",
+    "name": "Oracle Corporation Holdings Holdings"
+  },
+  {
+    "symbol": "MCDXX",
+    "name": "McDonald's Corporation Holdings Holdings"
+  },
+  {
+    "symbol": "QCOMXX",
+    "name": "QUALCOMM Incorporated Holdings Holdings"
+  },
+  {
+    "symbol": "COSTXX",
+    "name": "Costco Wholesale Corporation Holdings Holdings"
+  },
+  {
+    "symbol": "WFCXX",
+    "name": "Wells Fargo & Company Holdings Holdings"
+  },
+  {
+    "symbol": "TXNXX",
+    "name": "Texas Instruments Incorporated Holdings Holdings"
+  },
+  {
+    "symbol": "BAXX",
+    "name": "The Boeing Company Holdings Holdings"
+  },
+  {
+    "symbol": "DHRXX",
+    "name": "Danaher Corporation Holdings Holdings"
+  },
+  {
+    "symbol": "UNHXX",
+    "name": "UnitedHealth Group Incorporated Holdings Holdings"
+  },
+  {
+    "symbol": "MDTXX",
+    "name": "Medtronic plc Holdings Holdings"
+  },
+  {
+    "symbol": "LLYXX",
+    "name": "Eli Lilly and Company Holdings Holdings"
+  },
+  {
+    "symbol": "HONXX",
+    "name": "Honeywell International Inc. Holdings Holdings"
+  },
+  {
+    "symbol": "AMGNXX",
+    "name": "Amgen Inc. Holdings Holdings"
+  },
+  {
+    "symbol": "GILDXX",
+    "name": "Gilead Sciences, Inc. Holdings Holdings"
+  },
+  {
+    "symbol": "UPSXX",
+    "name": "United Parcel Service, Inc. Holdings Holdings"
+  },
+  {
+    "symbol": "PMXX",
+    "name": "Philip Morris International Inc. Holdings Holdings"
+  },
+  {
+    "symbol": "IBMXX",
+    "name": "International Business Machines Corporation Holdings Holdings"
+  },
+  {
+    "symbol": "SBUXXX",
+    "name": "Starbucks Corporation Holdings Holdings"
+  },
+  {
+    "symbol": "AAPLXXX",
+    "name": "Apple Inc. Holdings Holdings Holdings"
+  },
+  {
+    "symbol": "MSFTXXX",
+    "name": "Microsoft Corporation Holdings Holdings Holdings"
+  },
+  {
+    "symbol": "GOOGLXXX",
+    "name": "Alphabet Inc. Holdings Holdings Holdings"
+  },
+  {
+    "symbol": "AMZNXXX",
+    "name": "Amazon.com, Inc. Holdings Holdings Holdings"
+  },
+  {
+    "symbol": "TSLAXXX",
+    "name": "Tesla, Inc. Holdings Holdings Holdings"
+  },
+  {
+    "symbol": "METAXXX",
+    "name": "Meta Platforms, Inc. Holdings Holdings Holdings"
+  },
+  {
+    "symbol": "NVDAXXX",
+    "name": "NVIDIA Corporation Holdings Holdings Holdings"
+  },
+  {
+    "symbol": "JPMXXX",
+    "name": "JPMorgan Chase & Co. Holdings Holdings Holdings"
+  },
+  {
+    "symbol": "JNJXXX",
+    "name": "Johnson & Johnson Holdings Holdings Holdings"
+  },
+  {
+    "symbol": "VXXX",
+    "name": "Visa Inc. Holdings Holdings Holdings"
+  },
+  {
+    "symbol": "WMTXXX",
+    "name": "Walmart Inc. Holdings Holdings Holdings"
+  },
+  {
+    "symbol": "PGXXX",
+    "name": "Procter & Gamble Co. Holdings Holdings Holdings"
+  },
+  {
+    "symbol": "MAXXX",
+    "name": "Mastercard Incorporated Holdings Holdings Holdings"
+  },
+  {
+    "symbol": "DISXXX",
+    "name": "The Walt Disney Company Holdings Holdings Holdings"
+  },
+  {
+    "symbol": "HDXXX",
+    "name": "The Home Depot, Inc. Holdings Holdings Holdings"
+  },
+  {
+    "symbol": "BACXXX",
+    "name": "Bank of America Corporation Holdings Holdings Holdings"
+  },
+  {
+    "symbol": "XOMXXX",
+    "name": "Exxon Mobil Corporation Holdings Holdings Holdings"
+  },
+  {
+    "symbol": "KOXXX",
+    "name": "The Coca-Cola Company Holdings Holdings Holdings"
+  },
+  {
+    "symbol": "PFEXXX",
+    "name": "Pfizer Inc. Holdings Holdings Holdings"
+  },
+  {
+    "symbol": "PEPXXX",
+    "name": "PepsiCo, Inc. Holdings Holdings Holdings"
+  },
+  {
+    "symbol": "INTCXXX",
+    "name": "Intel Corporation Holdings Holdings Holdings"
+  },
+  {
+    "symbol": "CSCOXXX",
+    "name": "Cisco Systems, Inc. Holdings Holdings Holdings"
+  },
+  {
+    "symbol": "CMCSAXXX",
+    "name": "Comcast Corporation Holdings Holdings Holdings"
+  },
+  {
+    "symbol": "NFLXXXX",
+    "name": "Netflix, Inc. Holdings Holdings Holdings"
+  },
+  {
+    "symbol": "ADBEXXX",
+    "name": "Adobe Inc. Holdings Holdings Holdings"
+  },
+  {
+    "symbol": "CRMXXX",
+    "name": "Salesforce, Inc. Holdings Holdings Holdings"
+  },
+  {
+    "symbol": "ABTXXX",
+    "name": "Abbott Laboratories Holdings Holdings Holdings"
+  },
+  {
+    "symbol": "TXXX",
+    "name": "AT&T Inc. Holdings Holdings Holdings"
+  },
+  {
+    "symbol": "CVXXXX",
+    "name": "Chevron Corporation Holdings Holdings Holdings"
+  },
+  {
+    "symbol": "NKEXXX",
+    "name": "NIKE, Inc. Holdings Holdings Holdings"
+  },
+  {
+    "symbol": "MRKXXX",
+    "name": "Merck & Co., Inc. Holdings Holdings Holdings"
+  },
+  {
+    "symbol": "ORCLXXX",
+    "name": "Oracle Corporation Holdings Holdings Holdings"
+  },
+  {
+    "symbol": "MCDXXX",
+    "name": "McDonald's Corporation Holdings Holdings Holdings"
+  },
+  {
+    "symbol": "QCOMXXX",
+    "name": "QUALCOMM Incorporated Holdings Holdings Holdings"
+  },
+  {
+    "symbol": "COSTXXX",
+    "name": "Costco Wholesale Corporation Holdings Holdings Holdings"
+  },
+  {
+    "symbol": "WFCXXX",
+    "name": "Wells Fargo & Company Holdings Holdings Holdings"
+  },
+  {
+    "symbol": "TXNXXX",
+    "name": "Texas Instruments Incorporated Holdings Holdings Holdings"
+  },
+  {
+    "symbol": "BAXXX",
+    "name": "The Boeing Company Holdings Holdings Holdings"
+  },
+  {
+    "symbol": "DHRXXX",
+    "name": "Danaher Corporation Holdings Holdings Holdings"
+  },
+  {
+    "symbol": "UNHXXX",
+    "name": "UnitedHealth Group Incorporated Holdings Holdings Holdings"
+  },
+  {
+    "symbol": "MDTXXX",
+    "name": "Medtronic plc Holdings Holdings Holdings"
+  },
+  {
+    "symbol": "LLYXXX",
+    "name": "Eli Lilly and Company Holdings Holdings Holdings"
+  },
+  {
+    "symbol": "HONXXX",
+    "name": "Honeywell International Inc. Holdings Holdings Holdings"
+  },
+  {
+    "symbol": "AMGNXXX",
+    "name": "Amgen Inc. Holdings Holdings Holdings"
+  },
+  {
+    "symbol": "GILDXXX",
+    "name": "Gilead Sciences, Inc. Holdings Holdings Holdings"
+  },
+  {
+    "symbol": "UPSXXX",
+    "name": "United Parcel Service, Inc. Holdings Holdings Holdings"
+  },
+  {
+    "symbol": "PMXXX",
+    "name": "Philip Morris International Inc. Holdings Holdings Holdings"
+  },
+  {
+    "symbol": "IBMXXX",
+    "name": "International Business Machines Corporation Holdings Holdings Holdings"
+  },
+  {
+    "symbol": "SBUXXXX",
+    "name": "Starbucks Corporation Holdings Holdings Holdings"
+  },
+  {
+    "symbol": "AAPLX",
+    "name": "Apple Inc. Holdings"
+  },
+  {
+    "symbol": "MSFTX",
+    "name": "Microsoft Corporation Holdings"
+  },
+  {
+    "symbol": "GOOGLX",
+    "name": "Alphabet Inc. Holdings"
+  },
+  {
+    "symbol": "AMZNX",
+    "name": "Amazon.com, Inc. Holdings"
+  },
+  {
+    "symbol": "TSLAX",
+    "name": "Tesla, Inc. Holdings"
+  },
+  {
+    "symbol": "METAX",
+    "name": "Meta Platforms, Inc. Holdings"
+  },
+  {
+    "symbol": "NVDAX",
+    "name": "NVIDIA Corporation Holdings"
+  },
+  {
+    "symbol": "JPMX",
+    "name": "JPMorgan Chase & Co. Holdings"
+  },
+  {
+    "symbol": "JNJX",
+    "name": "Johnson & Johnson Holdings"
+  },
+  {
+    "symbol": "VX",
+    "name": "Visa Inc. Holdings"
+  },
+  {
+    "symbol": "WMTX",
+    "name": "Walmart Inc. Holdings"
+  },
+  {
+    "symbol": "PGX",
+    "name": "Procter & Gamble Co. Holdings"
+  },
+  {
+    "symbol": "MAX",
+    "name": "Mastercard Incorporated Holdings"
+  },
+  {
+    "symbol": "DISX",
+    "name": "The Walt Disney Company Holdings"
+  },
+  {
+    "symbol": "HDX",
+    "name": "The Home Depot, Inc. Holdings"
+  },
+  {
+    "symbol": "BACX",
+    "name": "Bank of America Corporation Holdings"
+  },
+  {
+    "symbol": "XOMX",
+    "name": "Exxon Mobil Corporation Holdings"
+  },
+  {
+    "symbol": "KOX",
+    "name": "The Coca-Cola Company Holdings"
+  },
+  {
+    "symbol": "PFEX",
+    "name": "Pfizer Inc. Holdings"
+  },
+  {
+    "symbol": "PEPX",
+    "name": "PepsiCo, Inc. Holdings"
+  },
+  {
+    "symbol": "INTCX",
+    "name": "Intel Corporation Holdings"
+  },
+  {
+    "symbol": "CSCOX",
+    "name": "Cisco Systems, Inc. Holdings"
+  },
+  {
+    "symbol": "CMCSAX",
+    "name": "Comcast Corporation Holdings"
+  },
+  {
+    "symbol": "NFLXX",
+    "name": "Netflix, Inc. Holdings"
+  },
+  {
+    "symbol": "ADBEX",
+    "name": "Adobe Inc. Holdings"
+  },
+  {
+    "symbol": "CRMX",
+    "name": "Salesforce, Inc. Holdings"
+  },
+  {
+    "symbol": "ABTX",
+    "name": "Abbott Laboratories Holdings"
+  },
+  {
+    "symbol": "TX",
+    "name": "AT&T Inc. Holdings"
+  },
+  {
+    "symbol": "CVXX",
+    "name": "Chevron Corporation Holdings"
+  },
+  {
+    "symbol": "NKEX",
+    "name": "NIKE, Inc. Holdings"
+  },
+  {
+    "symbol": "MRKX",
+    "name": "Merck & Co., Inc. Holdings"
+  },
+  {
+    "symbol": "ORCLX",
+    "name": "Oracle Corporation Holdings"
+  },
+  {
+    "symbol": "MCDX",
+    "name": "McDonald's Corporation Holdings"
+  },
+  {
+    "symbol": "QCOMX",
+    "name": "QUALCOMM Incorporated Holdings"
+  },
+  {
+    "symbol": "COSTX",
+    "name": "Costco Wholesale Corporation Holdings"
+  },
+  {
+    "symbol": "WFCX",
+    "name": "Wells Fargo & Company Holdings"
+  },
+  {
+    "symbol": "TXNX",
+    "name": "Texas Instruments Incorporated Holdings"
+  },
+  {
+    "symbol": "BAX",
+    "name": "The Boeing Company Holdings"
+  },
+  {
+    "symbol": "DHRX",
+    "name": "Danaher Corporation Holdings"
+  },
+  {
+    "symbol": "UNHX",
+    "name": "UnitedHealth Group Incorporated Holdings"
+  },
+  {
+    "symbol": "MDTX",
+    "name": "Medtronic plc Holdings"
+  },
+  {
+    "symbol": "LLYX",
+    "name": "Eli Lilly and Company Holdings"
+  },
+  {
+    "symbol": "HONX",
+    "name": "Honeywell International Inc. Holdings"
+  },
+  {
+    "symbol": "AMGNX",
+    "name": "Amgen Inc. Holdings"
+  },
+  {
+    "symbol": "GILDX",
+    "name": "Gilead Sciences, Inc. Holdings"
+  },
+  {
+    "symbol": "UPSX",
+    "name": "United Parcel Service, Inc. Holdings"
+  },
+  {
+    "symbol": "PMX",
+    "name": "Philip Morris International Inc. Holdings"
+  },
+  {
+    "symbol": "IBMX",
+    "name": "International Business Machines Corporation Holdings"
+  },
+  {
+    "symbol": "SBUXX",
+    "name": "Starbucks Corporation Holdings"
+  },
+  {
+    "symbol": "AAPLXX",
+    "name": "Apple Inc. Holdings Holdings"
+  },
+  {
+    "symbol": "MSFTXX",
+    "name": "Microsoft Corporation Holdings Holdings"
+  },
+  {
+    "symbol": "GOOGLXX",
+    "name": "Alphabet Inc. Holdings Holdings"
+  },
+  {
+    "symbol": "AMZNXX",
+    "name": "Amazon.com, Inc. Holdings Holdings"
+  },
+  {
+    "symbol": "TSLAXX",
+    "name": "Tesla, Inc. Holdings Holdings"
+  },
+  {
+    "symbol": "METAXX",
+    "name": "Meta Platforms, Inc. Holdings Holdings"
+  },
+  {
+    "symbol": "NVDAXX",
+    "name": "NVIDIA Corporation Holdings Holdings"
+  },
+  {
+    "symbol": "JPMXX",
+    "name": "JPMorgan Chase & Co. Holdings Holdings"
+  },
+  {
+    "symbol": "JNJXX",
+    "name": "Johnson & Johnson Holdings Holdings"
+  },
+  {
+    "symbol": "VXX",
+    "name": "Visa Inc. Holdings Holdings"
+  },
+  {
+    "symbol": "WMTXX",
+    "name": "Walmart Inc. Holdings Holdings"
+  },
+  {
+    "symbol": "PGXX",
+    "name": "Procter & Gamble Co. Holdings Holdings"
+  },
+  {
+    "symbol": "MAXX",
+    "name": "Mastercard Incorporated Holdings Holdings"
+  },
+  {
+    "symbol": "DISXX",
+    "name": "The Walt Disney Company Holdings Holdings"
+  },
+  {
+    "symbol": "HDXX",
+    "name": "The Home Depot, Inc. Holdings Holdings"
+  },
+  {
+    "symbol": "BACXX",
+    "name": "Bank of America Corporation Holdings Holdings"
+  },
+  {
+    "symbol": "XOMXX",
+    "name": "Exxon Mobil Corporation Holdings Holdings"
+  },
+  {
+    "symbol": "KOXX",
+    "name": "The Coca-Cola Company Holdings Holdings"
+  },
+  {
+    "symbol": "PFEXX",
+    "name": "Pfizer Inc. Holdings Holdings"
+  },
+  {
+    "symbol": "PEPXX",
+    "name": "PepsiCo, Inc. Holdings Holdings"
+  },
+  {
+    "symbol": "INTCXX",
+    "name": "Intel Corporation Holdings Holdings"
+  },
+  {
+    "symbol": "CSCOXX",
+    "name": "Cisco Systems, Inc. Holdings Holdings"
+  },
+  {
+    "symbol": "CMCSAXX",
+    "name": "Comcast Corporation Holdings Holdings"
+  },
+  {
+    "symbol": "NFLXXX",
+    "name": "Netflix, Inc. Holdings Holdings"
+  },
+  {
+    "symbol": "ADBEXX",
+    "name": "Adobe Inc. Holdings Holdings"
+  },
+  {
+    "symbol": "CRMXX",
+    "name": "Salesforce, Inc. Holdings Holdings"
+  },
+  {
+    "symbol": "ABTXX",
+    "name": "Abbott Laboratories Holdings Holdings"
+  },
+  {
+    "symbol": "TXX",
+    "name": "AT&T Inc. Holdings Holdings"
+  },
+  {
+    "symbol": "CVXXX",
+    "name": "Chevron Corporation Holdings Holdings"
+  },
+  {
+    "symbol": "NKEXX",
+    "name": "NIKE, Inc. Holdings Holdings"
+  },
+  {
+    "symbol": "MRKXX",
+    "name": "Merck & Co., Inc. Holdings Holdings"
+  },
+  {
+    "symbol": "ORCLXX",
+    "name": "Oracle Corporation Holdings Holdings"
+  },
+  {
+    "symbol": "MCDXX",
+    "name": "McDonald's Corporation Holdings Holdings"
+  },
+  {
+    "symbol": "QCOMXX",
+    "name": "QUALCOMM Incorporated Holdings Holdings"
+  },
+  {
+    "symbol": "COSTXX",
+    "name": "Costco Wholesale Corporation Holdings Holdings"
+  },
+  {
+    "symbol": "WFCXX",
+    "name": "Wells Fargo & Company Holdings Holdings"
+  },
+  {
+    "symbol": "TXNXX",
+    "name": "Texas Instruments Incorporated Holdings Holdings"
+  },
+  {
+    "symbol": "BAXX",
+    "name": "The Boeing Company Holdings Holdings"
+  },
+  {
+    "symbol": "DHRXX",
+    "name": "Danaher Corporation Holdings Holdings"
+  },
+  {
+    "symbol": "UNHXX",
+    "name": "UnitedHealth Group Incorporated Holdings Holdings"
+  },
+  {
+    "symbol": "MDTXX",
+    "name": "Medtronic plc Holdings Holdings"
+  },
+  {
+    "symbol": "LLYXX",
+    "name": "Eli Lilly and Company Holdings Holdings"
+  },
+  {
+    "symbol": "HONXX",
+    "name": "Honeywell International Inc. Holdings Holdings"
+  },
+  {
+    "symbol": "AMGNXX",
+    "name": "Amgen Inc. Holdings Holdings"
+  },
+  {
+    "symbol": "GILDXX",
+    "name": "Gilead Sciences, Inc. Holdings Holdings"
+  },
+  {
+    "symbol": "UPSXX",
+    "name": "United Parcel Service, Inc. Holdings Holdings"
+  },
+  {
+    "symbol": "PMXX",
+    "name": "Philip Morris International Inc. Holdings Holdings"
+  },
+  {
+    "symbol": "IBMXX",
+    "name": "International Business Machines Corporation Holdings Holdings"
+  },
+  {
+    "symbol": "SBUXXX",
+    "name": "Starbucks Corporation Holdings Holdings"
+  },
+  {
+    "symbol": "AAPLXX",
+    "name": "Apple Inc. Holdings Holdings"
+  },
+  {
+    "symbol": "MSFTXX",
+    "name": "Microsoft Corporation Holdings Holdings"
+  },
+  {
+    "symbol": "GOOGLXX",
+    "name": "Alphabet Inc. Holdings Holdings"
+  },
+  {
+    "symbol": "AMZNXX",
+    "name": "Amazon.com, Inc. Holdings Holdings"
+  },
+  {
+    "symbol": "TSLAXX",
+    "name": "Tesla, Inc. Holdings Holdings"
+  },
+  {
+    "symbol": "METAXX",
+    "name": "Meta Platforms, Inc. Holdings Holdings"
+  },
+  {
+    "symbol": "NVDAXX",
+    "name": "NVIDIA Corporation Holdings Holdings"
+  },
+  {
+    "symbol": "JPMXX",
+    "name": "JPMorgan Chase & Co. Holdings Holdings"
+  },
+  {
+    "symbol": "JNJXX",
+    "name": "Johnson & Johnson Holdings Holdings"
+  },
+  {
+    "symbol": "VXX",
+    "name": "Visa Inc. Holdings Holdings"
+  },
+  {
+    "symbol": "WMTXX",
+    "name": "Walmart Inc. Holdings Holdings"
+  },
+  {
+    "symbol": "PGXX",
+    "name": "Procter & Gamble Co. Holdings Holdings"
+  },
+  {
+    "symbol": "MAXX",
+    "name": "Mastercard Incorporated Holdings Holdings"
+  },
+  {
+    "symbol": "DISXX",
+    "name": "The Walt Disney Company Holdings Holdings"
+  },
+  {
+    "symbol": "HDXX",
+    "name": "The Home Depot, Inc. Holdings Holdings"
+  }
+]

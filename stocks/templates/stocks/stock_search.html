@@ -9,7 +9,7 @@
   }
 
   .btn-search {
-    transition: background-color 0.3s ease, transform 0.2s ease;
+    transition: background-color 0.3s ease, transform: scale 0.2s ease;
   }
 
   .btn-search:hover {
@@ -109,25 +109,54 @@
   }
 
   .silver-divider {
-  border: none;
-  height: 1.5px;
-  background-color: #bebec0;
-  margin-top: 0.5rem;
-  margin-bottom: 0.5rem;
-  opacity: 0.8;
-}
+    border: none;
+    height: 1.5px;
+    background-color: #bebec0;
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+    opacity: 0.8;
+  }
+
+  #suggestions {
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10;
+    background-color: #051d40;
+    width: 50%;
+    max-height: 200px;
+    overflow-y: auto;
+    border: 1px solid #1cabb0;
+    border-top: none;
+    list-style: none;
+    padding-left: 0;
+    display: none;
+  }
+
+  #suggestions li {
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    color: #ffffff;
+  }
+
+  #suggestions li:hover,
+  #suggestions li.active {
+    background-color: #168a8d;
+  }
 </style>
 
 <div class="container mt-4">
-  <!-- Search Bar -->
-  <form method="post" class="mb-4">
+  <form method="post" class="mb-4 position-relative">
     {% csrf_token %}
     <div class="input-group mt-3 w-50 mx-auto">
       <input
         type="text"
         name="ticker"
+        id="tickerInput"
         class="form-control"
         placeholder="Enter stock ticker (e.g., AAPL)"
+        autocomplete="off"
         required
         style="background-color: #051d40 !important; color: #ffffff !important; border: 1px solid #1cabb0 !important; caret-color: white !important;">
       <button
@@ -137,6 +166,7 @@
         Search
       </button>
     </div>
+    <ul id="suggestions"></ul>
   </form>
 
   {% if error %}
@@ -166,8 +196,8 @@
 
   <hr class="stock-divider">
 
-   {% if stats_data %}
-  <div class="stats-grid text-white" style="font-size: 1.15rem; display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; margin-top: 1rem;">
+  {% if stats_data %}
+  <div class="stats-grid text-white" style="font-size: 1.15rem; margin-top: 1rem;">
     <div>
       <p style="display: flex; justify-content: space-between; border-bottom: 1px solid #1cabb0; padding-bottom: 0.4rem;"><strong>Exchange</strong> <span>{{ stats_data.exchange }}</span></p>
       <p style="display: flex; justify-content: space-between; border-bottom: 1px solid #1cabb0; padding-bottom: 0.4rem;"><strong>Trading Volume</strong> <span>{{ stats_data.volume|intcomma }}</span></p>
@@ -181,9 +211,9 @@
       <p style="display: flex; justify-content: space-between; border-bottom: 1px solid #1cabb0; padding-bottom: 0.4rem;"><strong>Low</strong> <span>${{ stats_data.low }}</span></p>
     </div>
   </div>
-{% endif %}
+  {% endif %}
 
-<hr class="silver-divider">
+  <hr class="silver-divider">
 
   {% if chart_data %}
     <h4 class="text-white mt-3 mb-2" style="font-size: 1.4rem;">7 Day Financial Insight</h4>
@@ -223,59 +253,27 @@
           responsive: true,
           scales: {
             x: {
-              grid: {
-                display: false,
-                drawTicks: false,
-                drawBorder: true
-              },
+              grid: { display: false, drawTicks: false, drawBorder: true },
               ticks: {
                 color: '#ffffff',
                 padding: 10,
-                font: {
-                  size: 16,
-                  weight: '500'
-                },
-                callback: function(value, index, ticks) {
+                font: { size: 16, weight: '500' },
+                callback: function(value) {
                   const label = this.getLabelForValue(value);
                   const date = new Date(label);
-                  return date.toLocaleDateString('en-US', {
-                    month: 'short',
-                    day: 'numeric'
-                  });
+                  return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
                 }
               },
-              border: {
-                color: '#bebec0',
-                width: 2
-              }
+              border: { color: '#bebec0', width: 2 }
             },
             y: {
-              grid: {
-                color: '#bebec0',
-                lineWidth: 0.5,
-                drawTicks: false,
-                drawBorder: false
-              },
-              ticks: {
-                color: '#ffffff',
-                padding: 10,
-                font: {
-                  size: 16,
-                  weight: '500'
-                }
-              },
-              border: {
-                display: false
-              }
+              grid: { color: '#bebec0', lineWidth: 0.5, drawTicks: false, drawBorder: false },
+              ticks: { color: '#ffffff', padding: 10, font: { size: 16, weight: '500' } }
             }
           },
           plugins: {
-            legend: {
-              display: false
-            },
-            title: {
-              display: false
-            },
+            legend: { display: false },
+            title: { display: false },
             tooltip: {
               enabled: true,
               backgroundColor: '#1cabb0',
@@ -290,4 +288,92 @@
     </script>
   {% endif %}
 </div>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  const input = document.getElementById("tickerInput");
+  const suggestionsBox = document.getElementById("suggestions");
+  const form = input.closest("form");
+  let companies = [];
+  let activeIndex = -1;
+
+  fetch("{% static 'data/companies.json' %}")
+    .then(response => response.json())
+    .then(data => companies = data);
+
+  input.addEventListener("input", function () {
+    const query = input.value.toLowerCase();
+    suggestionsBox.innerHTML = "";
+    activeIndex = -1;
+
+    if (query.length < 2) {
+      suggestionsBox.style.display = "none";
+      return;
+    }
+
+    const matches = companies.filter(c =>
+      c.symbol.toLowerCase().includes(query) || c.name.toLowerCase().includes(query)
+    ).slice(0, 10);
+
+    matches.forEach((match, i) => {
+      const li = document.createElement("li");
+      li.textContent = `${match.symbol} — ${match.name}`;
+      li.addEventListener("click", () => {
+        input.value = match.symbol;
+        suggestionsBox.innerHTML = "";
+        suggestionsBox.style.display = "none";
+        form.submit();
+      });
+      suggestionsBox.appendChild(li);
+    });
+
+    suggestionsBox.style.display = matches.length ? "block" : "none";
+  });
+
+  input.addEventListener("keydown", function (e) {
+    const items = suggestionsBox.getElementsByTagName("li");
+    if (!items.length) return;
+
+    if (e.key === "ArrowDown") {
+      activeIndex = (activeIndex + 1) % items.length;
+    } else if (e.key === "ArrowUp") {
+      activeIndex = (activeIndex - 1 + items.length) % items.length;
+    } else if (e.key === "Enter") {
+      e.preventDefault();
+      if (activeIndex >= 0) {
+        items[activeIndex].click();
+      } else {
+        items[0].click();  // fallback to top suggestion
+      }
+    }
+
+    Array.from(items).forEach((el, i) => {
+      el.classList.toggle("active", i === activeIndex);
+    });
+  });
+
+  // ✅ Prevent gibberish search
+  form.addEventListener("submit", function (e) {
+    const query = input.value.trim().toLowerCase();
+    const found = companies.find(c =>
+      c.symbol.toLowerCase() === query || c.name.toLowerCase() === query
+    );
+
+    if (found) {
+      input.value = found.symbol; // Normalize to ticker
+    } else {
+      e.preventDefault();
+      suggestionsBox.innerHTML = `<li style="color: red; padding: 0.5rem 1rem;">Not a valid stock. Please select from the list.</li>`;
+      suggestionsBox.style.display = "block";
+    }
+  });
+
+  document.addEventListener("click", e => {
+    if (!suggestionsBox.contains(e.target) && e.target !== input) {
+      suggestionsBox.innerHTML = "";
+      suggestionsBox.style.display = "none";
+    }
+  });
+});
+</script>
 {% endblock %}
