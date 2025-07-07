@@ -144,6 +144,20 @@
   #suggestions li.active {
     background-color: #168a8d;
   }
+
+  .news-item {
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.news-item:hover {
+  background-color: #1cabb0 !important;
+  color: white !important;
+}
+
+.news-item:hover small.source-name {
+  color: #051d40 !important;
+  font-weight: 600;
+}
 </style>
 
 <div class="container mt-4">
@@ -288,6 +302,33 @@
     </script>
   {% endif %}
 </div>
+
+{% if related_news %}
+  <hr class="silver-divider">
+  <h4 class="text-white mt-4 mb-2" style="font-size: 1.4rem;">Latest News About {{ stock_data.name }}</h4>
+  <div style="background-color: #1cabb0; height: 5px; border-radius: 0px; margin-bottom: 0rem;"></div>
+  <div style="background-color: #051d40;">
+    {% for article in related_news %}
+    <a href="{{ article.url }}"
+   class="d-flex align-items-start justify-content-between gap-3 px-3 py-3 text-decoration-none news-item"
+   style="background-color: #051d40; color: white; border-bottom: 1px solid #1cabb0;">
+  
+  <div class="flex-grow-1 pe-3">
+    <div>{{ article.title }}</div>
+    {% if article.published %}
+      <small class="source-name" style="color: #1cabb0;">{{ article.source }}</small>
+      <small style="color: #ccc;">&middot; {{ article.published|timesince }} ago &middot; {{ article.published|date:"l, j F" }}</small>
+    {% endif %}
+  </div>
+
+  {% if article.image %}
+    <img src="{{ article.image }}" alt="thumbnail"
+         style="width: 80px; height: 60px; object-fit: cover; border-radius: 6px; flex-shrink: 0;">
+  {% endif %}
+</a>
+    {% endfor %}
+  </div>
+{% endif %}
 
 <script>
 document.addEventListener("DOMContentLoaded", function () {

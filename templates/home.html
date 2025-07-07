@@ -25,9 +25,14 @@
     color: white !important;
   }
 
+  .news-item:hover .source-name {
+  color: #051d40 !important;
+  font-weight: 600;
+}
+
   .stock-card {
-    background-color: #051d40; /* Navy blue */
-    border: 2px solid #bebec0;  /* Silver border */
+    background-color: #051d40;
+    border: 2px solid #bebec0;
     border-radius: 10px;
     padding: 1rem;
     display: flex;
@@ -95,37 +100,75 @@
     font-size: 2rem;
     font-weight: bold;
   }
+
+  /* Predictive dropdown */
+  #suggestions {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    transform: none;
+    min-width: 100%;
+    max-width: 100%;
+    z-index: 10;
+    background-color: #051d40;
+    max-height: 200px;
+    overflow-y: auto;
+    border: 1px solid #1cabb0;
+    border-top: none;
+    list-style: none;
+    padding-left: 0;
+    display: none;
+  }
+
+  #suggestions li {
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    color: #ffffff;
+    text-align: left;
+  }
+
+  #suggestions li:hover,
+  #suggestions li.active {
+    background-color: #168a8d;
+  }
+
 </style>
 
 <div class="container my-5">
   <!-- Search Section -->
   <div class="text-center mb-4">
     <h1 class="text-white">Track Your Stocks Instantly</h1>
-    <form method="post" action="/stocks/">
-      {% csrf_token %}
-      <div class="input-group mt-3 w-50 mx-auto">
-        <input
-          type="text"
-          name="ticker"
-          class="form-control"
-          placeholder="Enter stock ticker (e.g., AAPL)"
-          required
-          style="background-color: #051d40 !important; color: #ffffff !important; border: 1px solid #1cabb0 !important; caret-color: white !important;">
-        <button
-          type="submit"
-          class="btn btn-search"
-          style="background-color: #1cabb0; color: white; border: none;">
-          Search
-        </button>
-      </div>
-    </form>
+    <div class="w-50 mx-auto position-relative" style="width: 50%;">
+      <form method="post" action="/stocks/">
+        {% csrf_token %}
+        <div class="input-group mt-3">
+          <input
+            type="text"
+            name="ticker"
+            id="tickerInput"
+            class="form-control"
+            placeholder="Enter stock ticker (e.g., AAPL)"
+            autocomplete="off"
+            required
+            style="background-color: #051d40 !important; color: #ffffff !important; border: 1px solid #1cabb0 !important; caret-color: white !important;">
+          <button
+            type="submit"
+            class="btn btn-search"
+            style="background-color: #1cabb0; color: white; border: none;">
+            Search
+          </button>
+        </div>
+        <ul id="suggestions"></ul>
+      </form>
+    </div>
   </div>
 
   <!-- Popular Stocks -->
   <h3 class="mb-3 text-white">Popular Stocks</h3>
   <div class="row row-cols-1 row-cols-md-3 g-4">
-    {% for ticker, stock in popular_stocks.items %}
-      <div class="col">
+  {% for ticker, stock in popular_stocks.items %}
+    <div class="col">
+      <a href="/stocks/?ticker={{ ticker }}" class="text-decoration-none">
         <div class="card stock-card shadow-sm">
           <div class="stock-left">
             <h5 class="stock-title">{{ ticker }}</h5>
@@ -142,31 +185,109 @@
             {% if stock.change >= 0 %}↑{% else %}↓{% endif %}
           </div>
         </div>
-      </div>
-    {% endfor %}
-  </div>
+      </a>
+    </div>
+  {% endfor %}
+</div>
 
   <!-- News Feed -->
-  <h3 class="mt-5 mb-3 text-white">Latest Financial News</h3>
-  <div>
-    <div style="background-color: #1cabb0; height: 4px;"></div>
-    <div style="background-color: #051d40;">
-      {% for article in news %}
-      <a href="{{ article.url }}"
-        class="d-block px-3 py-2 text-decoration-none news-item"
-        style="background-color: #051d40; color: white; border-bottom: 1px solid #1cabb0;">
+<h3 class="mt-5 mb-3 text-white">Latest Financial News</h3>
+<div style="background-color: #1cabb0; height: 4px;"></div>
+<div style="background-color: #051d40;">
+  {% for article in news %}
+    <a href="{{ article.url }}"
+       class="d-flex justify-content-between align-items-start gap-3 px-3 py-3 text-decoration-none news-item"
+       style="background-color: #051d40; color: white; border-bottom: 1px solid #1cabb0;">
+
+      <div class="flex-grow-1">
         <div>{{ article.title }}</div>
         {% if article.published %}
-          <small style="color: #1cabb0; font-weight: 600;">
+          <small class="source-name" style="color: #1cabb0;">
             {{ article.source }}
           </small>
           <small style="color: #ccc;">
             &middot; {{ article.published|timesince }} ago &middot; {{ article.published|date:"l, j F" }}
           </small>
         {% endif %}
-      </a>  
-      {% endfor %}
-    </div>
-  </div>
+      </div>
+
+      {% if article.image %}
+        <img src="{{ article.image }}" alt="thumbnail"
+             style="width: 80px; height: 60px; object-fit: cover; border-radius: 6px; flex-shrink: 0;">
+      {% endif %}
+    </a>
+  {% endfor %}
 </div>
+
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  const input = document.getElementById("tickerInput");
+  const suggestionsBox = document.getElementById("suggestions");
+  const form = input.closest("form");
+  let companies = [];
+  let activeIndex = -1;
+
+  fetch("{% static 'data/companies.json' %}")
+    .then(response => response.json())
+    .then(data => companies = data);
+
+  input.addEventListener("input", function () {
+    const query = input.value.toLowerCase();
+    suggestionsBox.innerHTML = "";
+    activeIndex = -1;
+
+    if (query.length < 2) {
+      suggestionsBox.style.display = "none";
+      return;
+    }
+
+    const matches = companies.filter(c =>
+      c.symbol.toLowerCase().includes(query) || c.name.toLowerCase().includes(query)
+    ).slice(0, 10);
+
+    matches.forEach((match, i) => {
+      const li = document.createElement("li");
+      li.textContent = `${match.symbol} — ${match.name}`;
+      li.addEventListener("click", () => {
+        input.value = match.symbol;
+        suggestionsBox.style.display = "none";
+        form.submit();
+      });
+      suggestionsBox.appendChild(li);
+    });
+
+    suggestionsBox.style.display = matches.length ? "block" : "none";
+  });
+
+  input.addEventListener("keydown", function (e) {
+    const items = suggestionsBox.getElementsByTagName("li");
+    if (!items.length) return;
+
+    if (e.key === "ArrowDown") {
+      activeIndex = (activeIndex + 1) % items.length;
+    } else if (e.key === "ArrowUp") {
+      activeIndex = (activeIndex - 1 + items.length) % items.length;
+    } else if (e.key === "Enter") {
+      e.preventDefault();
+      if (activeIndex >= 0) {
+        items[activeIndex].click();
+      } else {
+        items[0].click();  // fallback to top suggestion
+      }
+    }
+
+    Array.from(items).forEach((el, i) => {
+      el.classList.toggle("active", i === activeIndex);
+    });
+  });
+
+  document.addEventListener("click", e => {
+    if (!suggestionsBox.contains(e.target) && e.target !== input) {
+      suggestionsBox.innerHTML = "";
+      suggestionsBox.style.display = "none";
+    }
+  });
+});
+</script>
 {% endblock %}
