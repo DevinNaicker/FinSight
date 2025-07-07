@@ -71,14 +71,14 @@
     margin: 0rem 0;
   }
 
-.news-thumbnail-right {
-  width: 100px;
-  height: 100px;
-  object-fit: cover;
-  border-radius: 6px;
-  flex-shrink: 0;
-  margin-left: 1rem;
-}
+  .news-thumbnail-right {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 6px;
+    flex-shrink: 0;
+    margin-left: 1rem;
+  }
 </style>
 
 <div class="container news-container">
@@ -89,41 +89,54 @@
     <div class="alert alert-danger">{{ error }}</div>
   {% endif %}
 
-  {% if articles %}
-    {% for article in articles %}
-      <a href="{{ article.url }}" target="_blank" class="news-card-link">
-  <div class="news-card d-flex justify-content-between align-items-start gap-3">
-    <div class="flex-grow-1">
-      <div class="news-headline">{{ article.title }}</div>
-      {% if article.description %}
-        <div class="news-description">{{ article.description }}</div>
-      {% endif %}
-      <div class="news-meta">
-        <span class="news-source">{{ article.source.name }}</span> &middot;
-        {% if article.publishedAt %}
-          {{ article.publishedAt|naturaltime }} ({{ article.publishedAt|date:"l, d F" }})
-        {% endif %}
-      </div>
+  <div id="news-list">
+    {% include "news/news_partial.html" %}
+  </div>
+
+  {% if has_next %}
+    <div class="text-center mt-4">
+      <button id="loadMoreBtn" data-next-page="{{ current_page|add:1 }}" class="btn btn-outline-light"
+        style="border-color: #1cabb0; color: #1cabb0;">
+        Load More
+      </button>
     </div>
-    {% if article.urlToImage %}
-  <img src="{{ article.urlToImage }}"
-       alt="Thumbnail"
-       class="news-thumbnail-right"
-       onerror="this.style.display='none';">
-{% endif %}
-  </div>
-</a>
-<hr class="news-divider" />
-    {% endfor %}
-    {% if has_next %}
-  <div class="text-center mt-4">
-    <a href="?page={{ current_page|add:1 }}" class="btn btn-outline-light" style="border-color: #1cabb0; color: #1cabb0;">
-      Load More
-    </a>
-  </div>
-{% endif %}
-  {% else %}
-    <p>No news available.</p>
   {% endif %}
 </div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const loadMoreBtn = document.getElementById("loadMoreBtn");
+    const newsList = document.getElementById("news-list");
+
+    if (loadMoreBtn) {
+      loadMoreBtn.addEventListener("click", () => {
+        const nextPage = loadMoreBtn.dataset.nextPage;
+        loadMoreBtn.disabled = true;
+        loadMoreBtn.textContent = "Loading...";
+
+        fetch(`/news/?page=${nextPage}`)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const doc = parser.parseFromString(html, "text/html");
+            const newArticles = doc.getElementById("news-list").innerHTML;
+
+            newsList.insertAdjacentHTML("beforeend", newArticles);
+
+            const newBtn = doc.getElementById("loadMoreBtn");
+            if (newBtn) {
+              loadMoreBtn.dataset.nextPage = newBtn.dataset.nextPage;
+              loadMoreBtn.disabled = false;
+              loadMoreBtn.textContent = "Load More";
+            } else {
+              loadMoreBtn.remove();
+            }
+          })
+          .catch(() => {
+            loadMoreBtn.textContent = "Failed to load";
+          });
+      });
+    }
+  });
+</script>
 {% endblock %}

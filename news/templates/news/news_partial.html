@@ -1,0 +1,25 @@
+{% load humanize %}
+
+{% for article in articles %}
+  <a href="{{ article.url }}" target="_blank" class="news-card-link">
+    <div class="news-card d-flex justify-content-between align-items-start gap-3">
+      <div class="flex-grow-1">
+        <div class="news-headline">{{ article.title }}</div>
+        {% if article.description %}
+          <div class="news-description">{{ article.description }}</div>
+        {% endif %}
+        <div class="news-meta">
+          <span class="news-source">{{ article.source.name }}</span> &middot;
+          {% if article.publishedAt %}
+            {{ article.publishedAt|naturaltime }} ({{ article.publishedAt|date:"l, d F" }})
+          {% endif %}
+        </div>
+      </div>
+      {% if article.urlToImage %}
+        <img src="{{ article.urlToImage }}" alt="Thumbnail" class="news-thumbnail-right"
+             onerror="this.style.display='none';">
+      {% endif %}
+    </div>
+  </a>
+  <hr class="news-divider" />
+{% endfor %}
