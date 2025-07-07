@@ -77,35 +77,20 @@
     opacity: 1;
   }
 
-  .stats-section {
-    margin-top: 2rem;
-    color: white;
-  }
-
-  .stats-title {
-    font-size: 1.6rem;
-    margin-bottom: 1rem;
-  }
-
   .stats-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 1.5rem;
-  }
-
-  .stat-item {
-    margin-bottom: 0.6rem;
-  }
-
-  .stat-label {
-    color: #bebec0;
-    font-weight: 500;
-  }
-
-  .stat-value {
+    margin-top: 1rem;
+    font-size: 1.15rem;
     color: white;
-    font-weight: 600;
-    font-size: 1.1rem;
+  }
+
+  .stats-grid p {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid #1cabb0;
+    padding-bottom: 0.4rem;
   }
 
   .silver-divider {
@@ -146,18 +131,18 @@
   }
 
   .news-item {
-  transition: background-color 0.3s ease, color 0.3s ease;
-}
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
 
-.news-item:hover {
-  background-color: #1cabb0 !important;
-  color: white !important;
-}
+  .news-item:hover {
+    background-color: #1cabb0 !important;
+    color: white !important;
+  }
 
-.news-item:hover small.source-name {
-  color: #051d40 !important;
-  font-weight: 600;
-}
+  .news-item:hover small.source-name {
+    color: #051d40 !important;
+    font-weight: 600;
+  }
 </style>
 
 <div class="container mt-4">
@@ -173,12 +158,9 @@
         autocomplete="off"
         required
         style="background-color: #051d40 !important; color: #ffffff !important; border: 1px solid #1cabb0 !important; caret-color: white !important;">
-      <button
-          type="submit"
-          class="btn btn-search"
-          style="background-color: #1cabb0; color: white; border: none;">
-          <i class="fas fa-search"></i>
-        </button>
+      <button type="submit" class="btn btn-search" style="background-color: #1cabb0; color: white; border: none;">
+        <i class="fas fa-search"></i>
+      </button>
     </div>
     <ul id="suggestions"></ul>
   </form>
@@ -211,20 +193,20 @@
   <hr class="stock-divider">
 
   {% if stats_data %}
-  <div class="stats-grid text-white" style="font-size: 1.15rem; margin-top: 1rem;">
-    <div>
-      <p style="display: flex; justify-content: space-between; border-bottom: 1px solid #1cabb0; padding-bottom: 0.4rem;"><strong>Exchange</strong> <span>{{ stats_data.exchange }}</span></p>
-      <p style="display: flex; justify-content: space-between; border-bottom: 1px solid #1cabb0; padding-bottom: 0.4rem;"><strong>Trading Volume</strong> <span>{{ stats_data.volume|intcomma }}</span></p>
+    <div class="stats-grid">
+      <div>
+        <p><strong>Exchange</strong> <span>{{ stats_data.exchange }}</span></p>
+        <p><strong>Trading Volume</strong> <span>{{ stats_data.volume|intcomma }}</span></p>
+      </div>
+      <div>
+        <p><strong>Previous Close</strong> <span>${{ stats_data.prev_close }}</span></p>
+        <p><strong>Open</strong> <span>${{ stats_data.open }}</span></p>
+      </div>
+      <div>
+        <p><strong>High</strong> <span>${{ stats_data.high }}</span></p>
+        <p><strong>Low</strong> <span>${{ stats_data.low }}</span></p>
+      </div>
     </div>
-    <div>
-      <p style="display: flex; justify-content: space-between; border-bottom: 1px solid #1cabb0; padding-bottom: 0.4rem;"><strong>Previous Close</strong> <span>${{ stats_data.prev_close }}</span></p>
-      <p style="display: flex; justify-content: space-between; border-bottom: 1px solid #1cabb0; padding-bottom: 0.4rem;"><strong>Open</strong> <span>${{ stats_data.open }}</span></p>
-    </div>
-    <div>
-      <p style="display: flex; justify-content: space-between; border-bottom: 1px solid #1cabb0; padding-bottom: 0.4rem;"><strong>High</strong> <span>${{ stats_data.high }}</span></p>
-      <p style="display: flex; justify-content: space-between; border-bottom: 1px solid #1cabb0; padding-bottom: 0.4rem;"><strong>Low</strong> <span>${{ stats_data.low }}</span></p>
-    </div>
-  </div>
   {% endif %}
 
   <hr class="silver-divider">
@@ -250,7 +232,7 @@
         gradient.addColorStop(1, 'rgba(255, 0, 0, 0)');
       }
 
-      const priceChart = new Chart(ctx, {
+      new Chart(ctx, {
         type: 'line',
         data: {
           labels: labels,
@@ -267,29 +249,26 @@
           responsive: true,
           scales: {
             x: {
-              grid: { display: false, drawTicks: false, drawBorder: true },
+              grid: { display: false },
               ticks: {
                 color: '#ffffff',
                 padding: 10,
                 font: { size: 16, weight: '500' },
                 callback: function(value) {
-                  const label = this.getLabelForValue(value);
-                  const date = new Date(label);
+                  const date = new Date(this.getLabelForValue(value));
                   return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
                 }
               },
               border: { color: '#bebec0', width: 2 }
             },
             y: {
-              grid: { color: '#bebec0', lineWidth: 0.5, drawTicks: false, drawBorder: false },
+              grid: { color: '#bebec0', lineWidth: 0.5 },
               ticks: { color: '#ffffff', padding: 10, font: { size: 16, weight: '500' } }
             }
           },
           plugins: {
             legend: { display: false },
-            title: { display: false },
             tooltip: {
-              enabled: true,
               backgroundColor: '#1cabb0',
               titleColor: '#ffffff',
               bodyColor: '#ffffff',
@@ -301,38 +280,33 @@
       });
     </script>
   {% endif %}
+
+  {% if related_news %}
+    <hr class="silver-divider">
+    <h4 class="text-white mt-4 mb-2" style="font-size: 1.4rem;">Latest News About {{ stock_data.name }}</h4>
+    <div style="background-color: #1cabb0; height: 5px; margin-bottom: 0;"></div>
+    <div style="background-color: #051d40;">
+      {% for article in related_news %}
+        <a href="{{ article.url }}" target="_blank" rel="noopener noreferrer"
+           class="d-flex align-items-start justify-content-between gap-3 px-3 py-3 text-decoration-none news-item"
+           style="background-color: #051d40; color: white; border-bottom: 1px solid #1cabb0;">
+          <div class="flex-grow-1 pe-3">
+            <div>{{ article.title }}</div>
+            {% if article.published %}
+              <small class="source-name" style="color: #1cabb0;">{{ article.source }}</small>
+              <small style="color: #ccc;">&middot; {{ article.published|timesince }} ago &middot; {{ article.published|date:"l, j F" }}</small>
+            {% endif %}
+          </div>
+          {% if article.image %}
+            <img src="{{ article.image }}" alt="thumbnail"
+                 style="width: 80px; height: 60px; object-fit: cover; border-radius: 6px;"
+                 onerror="this.style.display='none';">
+          {% endif %}
+        </a>
+      {% endfor %}
+    </div>
+  {% endif %}
 </div>
-
-{% if related_news %}
-  <hr class="silver-divider">
-  <h4 class="text-white mt-4 mb-2" style="font-size: 1.4rem;">Latest News About {{ stock_data.name }}</h4>
-  <div style="background-color: #1cabb0; height: 5px; border-radius: 0px; margin-bottom: 0rem;"></div>
-  <div style="background-color: #051d40;">
-    {% for article in related_news %}
-    <a href="{{ article.url }}"
-   target="_blank"
-   rel="noopener noreferrer"
-   class="d-flex align-items-start justify-content-between gap-3 px-3 py-3 text-decoration-none news-item"
-   style="background-color: #051d40; color: white; border-bottom: 1px solid #1cabb0;">
-  
-  <div class="flex-grow-1 pe-3">
-    <div>{{ article.title }}</div>
-    {% if article.published %}
-      <small class="source-name" style="color: #1cabb0;">{{ article.source }}</small>
-      <small style="color: #ccc;">&middot; {{ article.published|timesince }} ago &middot; {{ article.published|date:"l, j F" }}</small>
-    {% endif %}
-  </div>
-
-  {% if article.image %}
-  <img src="{{ article.image }}"
-       alt="thumbnail"
-       style="width: 80px; height: 60px; object-fit: cover; border-radius: 6px; flex-shrink: 0;"
-       onerror="this.style.display='none';">
-{% endif %}
-</a>
-    {% endfor %}
-  </div>
-{% endif %}
 
 <script>
 document.addEventListener("DOMContentLoaded", function () {
@@ -388,7 +362,7 @@ document.addEventListener("DOMContentLoaded", function () {
       if (activeIndex >= 0) {
         items[activeIndex].click();
       } else {
-        items[0].click();  // fallback to top suggestion
+        items[0].click();  // fallback
       }
     }
 
@@ -397,7 +371,6 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   });
 
-  // ✅ Prevent gibberish search
   form.addEventListener("submit", function (e) {
     const query = input.value.trim().toLowerCase();
     const found = companies.find(c =>
@@ -405,7 +378,7 @@ document.addEventListener("DOMContentLoaded", function () {
     );
 
     if (found) {
-      input.value = found.symbol; // Normalize to ticker
+      input.value = found.symbol;
     } else {
       e.preventDefault();
       suggestionsBox.innerHTML = `<li style="color: red; padding: 0.5rem 1rem;">Not a valid stock. Please select from the list.</li>`;

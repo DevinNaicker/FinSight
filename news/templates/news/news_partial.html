@@ -16,8 +16,11 @@
         </div>
       </div>
       {% if article.urlToImage %}
-        <img src="{{ article.urlToImage }}" alt="Thumbnail" class="news-thumbnail-right"
-             onerror="this.style.display='none';">
+        <img
+          src="{{ article.urlToImage }}"
+          alt="Thumbnail"
+          class="news-thumbnail-right"
+          onerror="this.style.display='none';">
       {% endif %}
     </div>
   </a>

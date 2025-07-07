@@ -3,7 +3,6 @@ from django.conf import settings
 from django.shortcuts import render
 from datetime import datetime, timezone
 import json
-import pprint
 
 # HOMEPAGE VIEW
 def home(request):
@@ -14,8 +13,12 @@ def home(request):
     try:
         # News API
         api_key = settings.NEWS_API_KEY
-        news_url = f"https://newsapi.org/v2/top-headlines?category=business&language=en&pageSize=5&apiKey={api_key}"
+        news_url = (
+            f"https://newsapi.org/v2/top-headlines?"
+            f"category=business&language=en&pageSize=5&apiKey={api_key}"
+        )
         news_response = requests.get(news_url).json()
+
         if news_response.get("status") == "ok":
             articles = news_response.get("articles", [])
             for article in articles:
@@ -136,8 +139,12 @@ def stock_search(request):
 
             # Related News
             if company_name:
-                news_url = f"https://newsapi.org/v2/everything?q={company_name}&language=en&pageSize=5&apiKey={news_api_key}"
+                news_url = (
+                    f"https://newsapi.org/v2/everything?"
+                    f"q={company_name}&language=en&pageSize=5&apiKey={news_api_key}"
+                )
                 news_response = requests.get(news_url).json()
+
                 if news_response.get("status") == "ok":
                     articles = news_response.get("articles", [])
                     for article in articles:

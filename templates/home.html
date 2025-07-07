@@ -26,9 +26,9 @@
   }
 
   .news-item:hover .source-name {
-  color: #051d40 !important;
-  font-weight: 600;
-}
+    color: #051d40 !important;
+    font-weight: 600;
+  }
 
   .stock-card {
     background-color: #051d40;
@@ -101,12 +101,10 @@
     font-weight: bold;
   }
 
-  /* Predictive dropdown */
   #suggestions {
     position: absolute;
     top: 100%;
     left: 0;
-    transform: none;
     min-width: 100%;
     max-width: 100%;
     z-index: 10;
@@ -131,14 +129,13 @@
   #suggestions li.active {
     background-color: #168a8d;
   }
-
 </style>
 
 <div class="container my-5">
   <!-- Search Section -->
   <div class="text-center mb-4">
     <h1 class="text-white">Track Your Stocks Instantly</h1>
-    <div class="w-50 mx-auto position-relative" style="width: 50%;">
+    <div class="w-50 mx-auto position-relative">
       <form method="post" action="/stocks/">
         {% csrf_token %}
         <div class="input-group mt-3">
@@ -152,12 +149,12 @@
             required
             style="background-color: #051d40 !important; color: #ffffff !important; border: 1px solid #1cabb0 !important; caret-color: white !important;">
           <button
-  type="submit"
-  class="btn btn-search"
-  style="background-color: #1cabb0; color: white; border: none;"
-  title="Search">
-  <i class="fas fa-search"></i>
-</button>
+            type="submit"
+            class="btn btn-search"
+            style="background-color: #1cabb0; color: white; border: none;"
+            title="Search">
+            <i class="fas fa-search"></i>
+          </button>
         </div>
         <ul id="suggestions"></ul>
       </form>
@@ -167,63 +164,57 @@
   <!-- Popular Stocks -->
   <h3 class="mb-3 text-white">Popular Stocks</h3>
   <div class="row row-cols-1 row-cols-md-3 g-4">
-  {% for ticker, stock in popular_stocks.items %}
-    <div class="col">
-      <a href="/stocks/?ticker={{ ticker }}" class="text-decoration-none">
-        <div class="card stock-card shadow-sm">
-          <div class="stock-left">
-            <h5 class="stock-title">{{ ticker }}</h5>
-            <p class="company-name">{{ stock.name }}</p>
+    {% for ticker, stock in popular_stocks.items %}
+      <div class="col">
+        <a href="/stocks/?ticker={{ ticker }}" class="text-decoration-none">
+          <div class="card stock-card shadow-sm position-relative">
+            <div class="stock-left">
+              <h5 class="stock-title">{{ ticker }}</h5>
+              <p class="company-name">{{ stock.name }}</p>
+            </div>
+            <div class="stock-middle">
+              <p class="stock-price">${{ stock.price }}</p>
+              <p class="stock-change {% if stock.change >= 0 %}positive{% else %}negative{% endif %}">
+                {% if stock.change >= 0 %}+{% else %}-{% endif %}${{ stock.change|floatformat:2 }}
+                ({{ stock.percent|floatformat:2 }}%)
+              </p>
+            </div>
+            <div class="arrow {% if stock.change >= 0 %}text-success{% else %}text-danger{% endif %}">
+              {% if stock.change >= 0 %}↑{% else %}↓{% endif %}
+            </div>
           </div>
-          <div class="stock-middle">
-            <p class="stock-price">${{ stock.price }}</p>
-            <p class="stock-change {% if stock.change >= 0 %}positive{% else %}negative{% endif %}">
-              {% if stock.change >= 0 %}+{% else %}-{% endif %}${{ stock.change|floatformat:2 }}
-              ({{ stock.percent|floatformat:2 }}%)
-            </p>
-          </div>
-          <div class="arrow {% if stock.change >= 0 %}text-success{% else %}text-danger{% endif %}">
-            {% if stock.change >= 0 %}↑{% else %}↓{% endif %}
-          </div>
-        </div>
-      </a>
-    </div>
-  {% endfor %}
-</div>
+        </a>
+      </div>
+    {% endfor %}
+  </div>
 
   <!-- News Feed -->
-<h3 class="mt-5 mb-3 text-white">Latest Financial News</h3>
-<div style="background-color: #1cabb0; height: 4px;"></div>
-<div style="background-color: #051d40;">
-  {% for article in news %}
-    <a href="{{ article.url }}"
-   target="_blank"
-   rel="noopener noreferrer"
-   class="d-flex align-items-start justify-content-between gap-3 px-3 py-3 text-decoration-none news-item"
-   style="background-color: #051d40; color: white; border-bottom: 1px solid #1cabb0;">
-
-      <div class="flex-grow-1">
-        <div>{{ article.title }}</div>
-        {% if article.published %}
-          <small class="source-name" style="color: #1cabb0;">
-            {{ article.source }}
-          </small>
-          <small style="color: #ccc;">
-            &middot; {{ article.published|timesince }} ago &middot; {{ article.published|date:"l, j F" }}
-          </small>
+  <h3 class="mt-5 mb-3 text-white">Latest Financial News</h3>
+  <div style="background-color: #1cabb0; height: 4px;"></div>
+  <div style="background-color: #051d40;">
+    {% for article in news %}
+      <a href="{{ article.url }}"
+         target="_blank"
+         rel="noopener noreferrer"
+         class="d-flex align-items-start justify-content-between gap-3 px-3 py-3 text-decoration-none news-item"
+         style="background-color: #051d40; color: white; border-bottom: 1px solid #1cabb0;">
+        <div class="flex-grow-1">
+          <div>{{ article.title }}</div>
+          {% if article.published %}
+            <small class="source-name" style="color: #1cabb0;">{{ article.source }}</small>
+            <small style="color: #ccc;">&middot; {{ article.published|timesince }} ago &middot; {{ article.published|date:"l, j F" }}</small>
+          {% endif %}
+        </div>
+        {% if article.image %}
+          <img src="{{ article.image }}"
+               alt="thumbnail"
+               style="width: 80px; height: 60px; object-fit: cover; border-radius: 6px; flex-shrink: 0;"
+               onerror="this.style.display='none';">
         {% endif %}
-      </div>
-
-      {% if article.image %}
-  <img src="{{ article.image }}"
-       alt="thumbnail"
-       style="width: 80px; height: 60px; object-fit: cover; border-radius: 6px; flex-shrink: 0;"
-       onerror="this.style.display='none';">
-{% endif %}
-    </a>
-  {% endfor %}
+      </a>
+    {% endfor %}
+  </div>
 </div>
-
 
 <script>
 document.addEventListener("DOMContentLoaded", function () {
@@ -278,7 +269,7 @@ document.addEventListener("DOMContentLoaded", function () {
       if (activeIndex >= 0) {
         items[activeIndex].click();
       } else {
-        items[0].click();  // fallback to top suggestion
+        items[0].click(); // fallback to top suggestion
       }
     }
 

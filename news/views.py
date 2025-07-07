@@ -4,6 +4,7 @@ from django.shortcuts import render
 from datetime import datetime, timezone
 import math
 
+
 def news_feed(request):
     articles = []
     error = None
