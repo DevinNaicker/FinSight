@@ -3,25 +3,33 @@ from django.conf import settings
 from django.shortcuts import render
 from datetime import datetime, timezone
 import json
+from django.utils.safestring import mark_safe
+from django.utils.text import slugify
 
 # HOMEPAGE VIEW
 def home(request):
     news = []
     popular_stocks = {}
+    currency_data = {}
+    slugged_currency_data = {}
     tickers = ['AAPL', 'MSFT', 'GOOGL', 'TSLA', 'AMZN', 'NVDA']
+    currencies = ['BTC/USD', 'EUR/USD']
+    live_mode = False
+
+    # Map currency pair → full name
+    currency_full_names = {
+        'BTC/USD': 'Bitcoin to United States Dollar',
+        'EUR/USD': 'Euro to United States Dollar',
+    }
 
     try:
-        # News API
+        # News
         api_key = settings.NEWS_API_KEY
-        news_url = (
-            f"https://newsapi.org/v2/top-headlines?"
-            f"category=business&language=en&pageSize=5&apiKey={api_key}"
-        )
+        news_url = f"https://newsapi.org/v2/top-headlines?category=business&language=en&pageSize=5&apiKey={api_key}"
         news_response = requests.get(news_url).json()
 
         if news_response.get("status") == "ok":
-            articles = news_response.get("articles", [])
-            for article in articles:
+            for article in news_response.get("articles", []):
                 title = article.get('title', '')
                 source = article.get('source', {}).get('name', '')
                 url = article.get('url')
@@ -34,8 +42,7 @@ def home(request):
                 published_dt = None
                 if published_at:
                     try:
-                        published_dt = datetime.strptime(published_at, "%Y-%m-%dT%H:%M:%SZ")
-                        published_dt = published_dt.replace(tzinfo=timezone.utc)
+                        published_dt = datetime.strptime(published_at, "%Y-%m-%dT%H:%M:%SZ").replace(tzinfo=timezone.utc)
                     except Exception as e:
                         print(f"Failed to parse publishedAt: {e}")
 
@@ -47,34 +54,63 @@ def home(request):
                     'image': image_url
                 })
 
-        # Popular Stocks API
-        stock_api_key = settings.TWELVE_DATA_API_KEY
-        symbols = ','.join(tickers)
-        quote_url = f"https://api.twelvedata.com/quote?symbol={symbols}&apikey={stock_api_key}"
-        stock_response = requests.get(quote_url).json()
-
-        for ticker in tickers:
-            stock = stock_response.get(ticker)
-            if stock and "close" in stock:
-                change = float(stock['change'])
+        # Stocks
+        if live_mode:
+            for ticker in tickers:
                 popular_stocks[ticker] = {
-                    'price': float(stock['close']),
-                    'change': change,
-                    'abs_change': abs(change),
-                    'percent': float(stock['percent_change']),
-                    'name': stock.get('name', ''),
+                    'price': 0.0, 'change': 0.0, 'abs_change': 0.0,
+                    'percent': 0.0, 'name': ticker
                 }
+        else:
+            stock_api_key = settings.TWELVE_DATA_API_KEY
+            symbols = ','.join(tickers)
+            quote_url = f"https://api.twelvedata.com/quote?symbol={symbols}&apikey={stock_api_key}"
+            stock_response = requests.get(quote_url).json()
+
+            for ticker in tickers:
+                stock = stock_response.get(ticker)
+                if stock and "close" in stock:
+                    change = float(stock['change'])
+                    popular_stocks[ticker] = {
+                        'price': float(stock['close']),
+                        'change': change,
+                        'abs_change': abs(change),
+                        'percent': float(stock['percent_change']),
+                        'name': stock.get('name', ''),
+                    }
+
+        # Currencies (WebSocket placeholder)
+        for pair in currencies:
+            currency_data[pair] = {'price': 0.0}
+            slug = pair.replace('/', '-').lower()
+            slugged_currency_data[slug] = {
+                'price': 0.0,
+                'pair': pair,
+                'display': currency_full_names.get(pair, pair)
+            }
 
     except Exception as e:
         print(f"Homepage data fetch error: {e}")
 
+    print("🚨 FINAL currencies:", currencies)
+    print("🚨 FINAL currency_data keys:", list(currency_data.keys()))
+    print("🚨 Slugged currency keys:", list(slugged_currency_data.keys()))
+    print("✅ Slugged Currency Data:")
+    for slug, data in slugged_currency_data.items():
+        print(f"{slug}: {data}")
+
     return render(request, 'home.html', {
         'news': news,
         'popular_stocks': popular_stocks,
+        'currency_data': currency_data,
+        'slugged_currency_data': slugged_currency_data,
+        'live_mode': live_mode,
+        'tickers': mark_safe(json.dumps(list(popular_stocks.keys()))),
+        'currencies': mark_safe(json.dumps(currencies)),
     })
 
 
-# STOCK SEARCH VIEW
+# STOCK SEARCH VIEW (unchanged)
 def stock_search(request):
     stock_data = None
     chart_data = None
@@ -176,6 +212,7 @@ def stock_search(request):
         except Exception as e:
             error = str(e)
             print(f"Error fetching stock data: {error}")
+        
 
     return render(request, 'stocks/stock_search.html', {
         'stock_data': stock_data,

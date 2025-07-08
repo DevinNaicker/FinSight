@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.humanize',
     'stocks',
     'news',
+    'channels',
 ]
 
 MIDDLEWARE = [
@@ -69,6 +70,8 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'finsight.wsgi.application'
+
+ASGI_APPLICATION = 'finsight.asgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
@@ -116,3 +119,12 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # API Keys
 TWELVE_DATA_API_KEY = "de5874e84d14461da6914440fb9ace8d"
 NEWS_API_KEY = "52b661e836a04292ac1871d3ee0d2e2b"
+
+CHANNEL_LAYERS = {
+    "default": {
+        "BACKEND": "channels_redis.core.RedisChannelLayer",
+        "CONFIG": {
+            "hosts": [("redis", 6379)],
+        },
+    },
+}

@@ -1,5 +1,7 @@
+<!-- DEBUG: home.html LIVE -->
 {% extends 'base.html' %}
 {% load static %}
+{% load humanize %}
 
 {% block content %}
 <style>
@@ -30,7 +32,7 @@
     font-weight: 600;
   }
 
-  .stock-card {
+  .stock-card, .currency-card {
     background-color: #051d40;
     border: 2px solid #bebec0;
     border-radius: 10px;
@@ -43,7 +45,7 @@
     transition: transform 0.3s ease, box-shadow 0.3s ease;
   }
 
-  .stock-card:hover {
+  .stock-card:hover, .currency-card:hover {
     transform: scale(1.03);
     box-shadow: 0 0.75rem 1.5rem rgba(28, 171, 176, 0.4);
   }
@@ -100,6 +102,51 @@
     font-size: 2rem;
     font-weight: bold;
   }
+
+  .currency-row {
+    display: flex;
+    gap: 2rem;
+    margin-bottom: 2rem;
+  }
+
+  .currency-card {
+  flex: 1;
+  min-width: 200px;
+  height: 90px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.6rem 1rem;
+  background-color: #051d40;
+  border: 2px solid #bebec0;
+  border-radius: 10px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.currency-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.currency-name {
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: white;
+}
+
+.currency-full-name {
+  font-size: 1.2rem !important;
+  color: #1cabb0 !important;
+}
+
+.currency-price {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: white;
+  text-align: right;
+}
 
   #suggestions {
     position: absolute;
@@ -161,6 +208,28 @@
     </div>
   </div>
 
+  <!-- Currencies Section -->
+  <h3 class="mb-3 text-white">Currencies</h3>
+  <div class="currency-row">
+    {% for slug, data in slugged_currency_data.items %}
+    <div class="currency-card" id="currency-{{ slug }}">
+  <div class="currency-info">
+    <div class="currency-name">{{ data.pair }}</div>
+    <div class="currency-full-name text-muted" style="font-size: 0.9rem;">
+      {{ data.display }}
+    </div>
+  </div>
+  <div class="currency-price" id="currency-price-{{ slug }}">
+  {% if data.pair == "EUR/USD" %}
+    ${{ data.price|floatformat:5|intcomma }}
+  {% else %}
+    ${{ data.price|floatformat:2|intcomma }}
+  {% endif %}
+</div>
+</div> 
+    {% endfor %}
+  </div>
+
   <!-- Popular Stocks -->
   <h3 class="mb-3 text-white">Popular Stocks</h3>
   <div class="row row-cols-1 row-cols-md-3 g-4">
@@ -175,8 +244,7 @@
             <div class="stock-middle">
               <p class="stock-price">${{ stock.price }}</p>
               <p class="stock-change {% if stock.change >= 0 %}positive{% else %}negative{% endif %}">
-                {% if stock.change >= 0 %}+{% else %}-{% endif %}${{ stock.change|floatformat:2 }}
-                ({{ stock.percent|floatformat:2 }}%)
+                {% if stock.change >= 0 %}+{% else %}-{% endif %}${{ stock.change|floatformat:2 }} ({{ stock.percent|floatformat:2 }}%)
               </p>
             </div>
             <div class="arrow {% if stock.change >= 0 %}text-success{% else %}text-danger{% endif %}">
@@ -216,74 +284,110 @@
   </div>
 </div>
 
+<!-- Suggestion Script -->
 <script>
-document.addEventListener("DOMContentLoaded", function () {
-  const input = document.getElementById("tickerInput");
-  const suggestionsBox = document.getElementById("suggestions");
-  const form = input.closest("form");
-  let companies = [];
-  let activeIndex = -1;
+  document.addEventListener("DOMContentLoaded", function () {
+    const input = document.getElementById("tickerInput");
+    const suggestionsBox = document.getElementById("suggestions");
+    const form = input.closest("form");
+    let companies = [];
+    let activeIndex = -1;
 
-  fetch("{% static 'data/companies.json' %}")
-    .then(response => response.json())
-    .then(data => companies = data);
+    fetch("{% static 'data/companies.json' %}")
+      .then(response => response.json())
+      .then(data => companies = data);
 
-  input.addEventListener("input", function () {
-    const query = input.value.toLowerCase();
-    suggestionsBox.innerHTML = "";
-    activeIndex = -1;
-
-    if (query.length < 2) {
-      suggestionsBox.style.display = "none";
-      return;
-    }
-
-    const matches = companies.filter(c =>
-      c.symbol.toLowerCase().includes(query) || c.name.toLowerCase().includes(query)
-    ).slice(0, 10);
-
-    matches.forEach((match, i) => {
-      const li = document.createElement("li");
-      li.textContent = `${match.symbol} — ${match.name}`;
-      li.addEventListener("click", () => {
-        input.value = match.symbol;
-        suggestionsBox.style.display = "none";
-        form.submit();
-      });
-      suggestionsBox.appendChild(li);
-    });
-
-    suggestionsBox.style.display = matches.length ? "block" : "none";
-  });
-
-  input.addEventListener("keydown", function (e) {
-    const items = suggestionsBox.getElementsByTagName("li");
-    if (!items.length) return;
-
-    if (e.key === "ArrowDown") {
-      activeIndex = (activeIndex + 1) % items.length;
-    } else if (e.key === "ArrowUp") {
-      activeIndex = (activeIndex - 1 + items.length) % items.length;
-    } else if (e.key === "Enter") {
-      e.preventDefault();
-      if (activeIndex >= 0) {
-        items[activeIndex].click();
-      } else {
-        items[0].click(); // fallback to top suggestion
-      }
-    }
-
-    Array.from(items).forEach((el, i) => {
-      el.classList.toggle("active", i === activeIndex);
-    });
-  });
-
-  document.addEventListener("click", e => {
-    if (!suggestionsBox.contains(e.target) && e.target !== input) {
+    input.addEventListener("input", function () {
+      const query = input.value.toLowerCase();
       suggestionsBox.innerHTML = "";
-      suggestionsBox.style.display = "none";
-    }
+      activeIndex = -1;
+
+      if (query.length < 2) {
+        suggestionsBox.style.display = "none";
+        return;
+      }
+
+      const matches = companies.filter(c =>
+        c.symbol.toLowerCase().includes(query) || c.name.toLowerCase().includes(query)
+      ).slice(0, 10);
+
+      matches.forEach((match, i) => {
+        const li = document.createElement("li");
+        li.textContent = `${match.symbol} — ${match.name}`;
+        li.addEventListener("click", () => {
+          input.value = match.symbol;
+          suggestionsBox.style.display = "none";
+          form.submit();
+        });
+        suggestionsBox.appendChild(li);
+      });
+
+      suggestionsBox.style.display = matches.length ? "block" : "none";
+    });
+
+    input.addEventListener("keydown", function (e) {
+      const items = suggestionsBox.getElementsByTagName("li");
+      if (!items.length) return;
+
+      if (e.key === "ArrowDown") {
+        activeIndex = (activeIndex + 1) % items.length;
+      } else if (e.key === "ArrowUp") {
+        activeIndex = (activeIndex - 1 + items.length) % items.length;
+      } else if (e.key === "Enter") {
+        e.preventDefault();
+        if (activeIndex >= 0) {
+          items[activeIndex].click();
+        } else {
+          items[0].click();
+        }
+      }
+
+      Array.from(items).forEach((el, i) => {
+        el.classList.toggle("active", i === activeIndex);
+      });
+    });
+
+    document.addEventListener("click", e => {
+      if (!suggestionsBox.contains(e.target) && e.target !== input) {
+        suggestionsBox.innerHTML = "";
+        suggestionsBox.style.display = "none";
+      }
+    });
   });
-});
 </script>
+
+<!-- WebSocket for Live Currency Prices -->
+<script>
+  // ✅ Define formatter with variable decimal precision
+  const formatNumber = (num, decimals = 2) => {
+    return num.toLocaleString(undefined, {
+      minimumFractionDigits: decimals,
+      maximumFractionDigits: decimals
+    });
+  };
+
+  // ✅ WebSocket logic
+  const currencies = {{ currencies|safe }};
+  currencies.forEach(pair => {
+    const slug = pair.replace('/', '-').toLowerCase();
+    const socket = new WebSocket(`ws://${window.location.host}/ws/stocks/${slug}/`);
+
+    console.log("Slug created:", slug);
+
+    socket.onmessage = function (event) {
+      const data = JSON.parse(event.data);
+      console.log("📥 WebSocket data received:", data);
+
+      const priceElement = document.getElementById(`currency-price-${slug}`);
+      if (priceElement) {
+        // Use 5 decimals for EUR/USD, 2 for others
+        const decimals = pair === "EUR/USD" ? 5 : 2;
+        priceElement.textContent = `$${formatNumber(data.current, decimals)}`;
+      } else {
+        console.warn(`⚠️ No price element found for slug: ${slug}`);
+      }
+    };
+  });
+</script>
+
 {% endblock %}

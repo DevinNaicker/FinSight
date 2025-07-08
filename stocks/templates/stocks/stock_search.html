@@ -176,11 +176,9 @@
         <span class="company-name">{{ stock_data.name }}</span>
       </div>
       <div class="stock-right">
-        <span class="price">${{ stock_data.current }}</span>
-        <span class="{% if stock_data.change >= 0 %}positive{% else %}negative{% endif %}">
+        <span id="live-price" class="price">${{ stock_data.current }}</span>
+        <span id="live-change" class="{% if stock_data.change >= 0 %}positive{% else %}negative{% endif %}">
           {% if stock_data.change >= 0 %}+{% else %}-{% endif %}${{ stock_data.change|floatformat:2 }}
-        </span>
-        <span class="{% if stock_data.change >= 0 %}positive{% else %}negative{% endif %}">
           ({{ stock_data.percent_change|floatformat:2 }}%)
         </span>
         <span class="arrow {% if stock_data.change >= 0 %}text-success{% else %}text-danger{% endif %}">
@@ -393,5 +391,40 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 });
+</script>
+
+<script>
+  const ticker = "{{ stock_data.ticker|lower }}";
+const socket = new WebSocket(`ws://${window.location.host}/ws/stocks/${ticker}/`);
+
+socket.onopen = () => {
+  console.log("✅ WebSocket connected.");
+};
+
+socket.onmessage = function(event) {
+  console.log("📥 WebSocket message received:", event.data);
+
+  const data = JSON.parse(event.data);
+
+  if (data.current !== undefined) {
+    document.getElementById("live-price").textContent = `$${data.current}`;
+  }
+  if (data.change !== undefined) {
+    const changeElement = document.getElementById("live-change");
+    changeElement.textContent = `${data.change >= 0 ? '+' : ''}${data.change.toFixed(2)} (${data.percent_change.toFixed(2)}%)`;
+    changeElement.className = data.change >= 0 ? "stock-change positive" : "stock-change negative";
+  }
+};
+
+socket.onclose = () => {
+  console.warn("❌ WebSocket disconnected.");
+};
+
+socket.onerror = (error) => {
+  console.error("⚠️ WebSocket error:", error);
+};
+
+  socket.onopen = () => console.log("WebSocket connected.");
+  socket.onclose = () => console.log("WebSocket disconnected.");
 </script>
 {% endblock %}
