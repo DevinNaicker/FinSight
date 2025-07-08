@@ -85,10 +85,10 @@ python manage.py run_twelve_ws
 ##
 ### Stocks Page with Financial Overview and Data
 ![stocks](images/stocks.png)
-
+##
 ### Stocks Page Newsfeed with News Specific to the Stock at Hand
 ![stocks_newsfeed](images/stocks_newsfeed.png)
-
+##
 ### Newsfeed Page with Relevant and Current News
 ![news](images/newsfeed.png)
 
