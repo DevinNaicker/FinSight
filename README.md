@@ -30,7 +30,7 @@
 - **Live Data:**  
   - Stock & currency data from [Twelve Data](https://twelvedata.com/)  
   - News from [NewsAPI](https://newsapi.org/)  
-- **WebSockets:** Django Channels + Daphne  
+- **WebSockets:** Django Channels, Daphne, Redis  
 - **Database:** SQLite (for development)  
 - **Hosting:** Localhost (development environment)
 
