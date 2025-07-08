@@ -6,8 +6,13 @@
 
 ## 📂 Table of Contents
 
--[Features](#-features)
--[Tech Stack](#-tech-stack)
+- [Features](#-features)
+- [Tech Stack](#-tech-stack)
+- [Getting Started (Local Development)](#-getting-started)
+- [Screenshots](#-screenshots)
+- [Future Enhancements](#-future-enhancements)
+- [Author](#-author)
+- [License](#-license)
 
 ---
 
