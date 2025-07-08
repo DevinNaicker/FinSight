@@ -82,7 +82,7 @@ python manage.py run_twelve_ws
 
 ### Homepage with Live Data, Popular Stocks, and Financial Newsfeed
 ![home](images/homepage.png)
-
+##
 ### Stocks Page with Financial Overview and Data
 ![stocks](images/stocks.png)
 
