@@ -44,15 +44,37 @@
 git clone https://github.com/yourusername/finsight.git
 cd finsight
 ```
-###2. Create a virtual environment and activate it
+### 2. Create a virtual environment and activate it
 ```
 python -m venv venv
 source venv/bin/activate  # On Windows: venv\Scripts\activate
+```
+### 3. Install dependencies
+```
 pip install -r requirements.txt
+```
+### 4. Set environment variables
+
+Create a .env file or export these in your shell:
+```
 TWELVE_DATA_API_KEY=your_twelve_data_api_key
 NEWS_API_KEY=your_newsapi_key
+```
+Alternatively, you can define these in settings.py for development.
+
+### 5. Run migrations
+```
 python manage.py migrate
-python manage.py runserverpython manage.py run_twelve_ws
+```
+### 6. Start the Django development server
+```
+python manage.py runserver
+```
+### 7. Run the WebSocket worker
+
+In a separate terminal tab/window:
+```
+python manage.py run_twelve_ws
 ```
 
 ## 📸 Screenshots
