@@ -4,6 +4,13 @@
 
 ---
 
+## 📂 Table of Contents
+
+-[Features](#-features)
+-[Tech Stack](#-tech-stack)
+
+---
+
 ## 🚀 Features
 
 - 🔍 **Predictive Stock Search**  
