@@ -2,6 +2,7 @@ import json
 from channels.generic.websocket import AsyncWebsocketConsumer
 import re
 
+
 class StockConsumer(AsyncWebsocketConsumer):
     async def connect(self):
         symbol = self.scope['url_route']['kwargs']['symbol']

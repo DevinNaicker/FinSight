@@ -307,124 +307,115 @@
 </div>
 
 <script>
-document.addEventListener("DOMContentLoaded", function () {
-  const input = document.getElementById("tickerInput");
-  const suggestionsBox = document.getElementById("suggestions");
-  const form = input.closest("form");
-  let companies = [];
-  let activeIndex = -1;
+  // Predictive search dropdown
+  document.addEventListener("DOMContentLoaded", function () {
+    const input = document.getElementById("tickerInput");
+    const suggestionsBox = document.getElementById("suggestions");
+    const form = input.closest("form");
+    let companies = [];
+    let activeIndex = -1;
 
-  fetch("{% static 'data/companies.json' %}")
-    .then(response => response.json())
-    .then(data => companies = data);
+    fetch("{% static 'data/companies.json' %}")
+      .then(response => response.json())
+      .then(data => companies = data);
 
-  input.addEventListener("input", function () {
-    const query = input.value.toLowerCase();
-    suggestionsBox.innerHTML = "";
-    activeIndex = -1;
+    input.addEventListener("input", function () {
+      const query = input.value.toLowerCase();
+      suggestionsBox.innerHTML = "";
+      activeIndex = -1;
 
-    if (query.length < 2) {
-      suggestionsBox.style.display = "none";
-      return;
-    }
+      if (query.length < 2) {
+        suggestionsBox.style.display = "none";
+        return;
+      }
 
-    const matches = companies.filter(c =>
-      c.symbol.toLowerCase().includes(query) || c.name.toLowerCase().includes(query)
-    ).slice(0, 10);
+      const matches = companies.filter(c =>
+        c.symbol.toLowerCase().includes(query) || c.name.toLowerCase().includes(query)
+      ).slice(0, 10);
 
-    matches.forEach((match, i) => {
-      const li = document.createElement("li");
-      li.textContent = `${match.symbol} — ${match.name}`;
-      li.addEventListener("click", () => {
-        input.value = match.symbol;
+      matches.forEach((match, i) => {
+        const li = document.createElement("li");
+        li.textContent = `${match.symbol} — ${match.name}`;
+        li.addEventListener("click", () => {
+          input.value = match.symbol;
+          suggestionsBox.innerHTML = "";
+          suggestionsBox.style.display = "none";
+          form.submit();
+        });
+        suggestionsBox.appendChild(li);
+      });
+
+      suggestionsBox.style.display = matches.length ? "block" : "none";
+    });
+
+    input.addEventListener("keydown", function (e) {
+      const items = suggestionsBox.getElementsByTagName("li");
+      if (!items.length) return;
+
+      if (e.key === "ArrowDown") {
+        activeIndex = (activeIndex + 1) % items.length;
+      } else if (e.key === "ArrowUp") {
+        activeIndex = (activeIndex - 1 + items.length) % items.length;
+      } else if (e.key === "Enter") {
+        e.preventDefault();
+        if (activeIndex >= 0) {
+          items[activeIndex].click();
+        } else {
+          items[0].click();  // fallback
+        }
+      }
+
+      Array.from(items).forEach((el, i) => {
+        el.classList.toggle("active", i === activeIndex);
+      });
+    });
+
+    form.addEventListener("submit", function (e) {
+      const query = input.value.trim().toLowerCase();
+      const found = companies.find(c =>
+        c.symbol.toLowerCase() === query || c.name.toLowerCase() === query
+      );
+
+      if (found) {
+        input.value = found.symbol;
+      } else {
+        e.preventDefault();
+        suggestionsBox.innerHTML = `<li style="color: red; padding: 0.5rem 1rem;">Not a valid stock. Please select from the list.</li>`;
+        suggestionsBox.style.display = "block";
+      }
+    });
+
+    document.addEventListener("click", e => {
+      if (!suggestionsBox.contains(e.target) && e.target !== input) {
         suggestionsBox.innerHTML = "";
         suggestionsBox.style.display = "none";
-        form.submit();
-      });
-      suggestionsBox.appendChild(li);
-    });
-
-    suggestionsBox.style.display = matches.length ? "block" : "none";
-  });
-
-  input.addEventListener("keydown", function (e) {
-    const items = suggestionsBox.getElementsByTagName("li");
-    if (!items.length) return;
-
-    if (e.key === "ArrowDown") {
-      activeIndex = (activeIndex + 1) % items.length;
-    } else if (e.key === "ArrowUp") {
-      activeIndex = (activeIndex - 1 + items.length) % items.length;
-    } else if (e.key === "Enter") {
-      e.preventDefault();
-      if (activeIndex >= 0) {
-        items[activeIndex].click();
-      } else {
-        items[0].click();  // fallback
       }
-    }
-
-    Array.from(items).forEach((el, i) => {
-      el.classList.toggle("active", i === activeIndex);
     });
   });
-
-  form.addEventListener("submit", function (e) {
-    const query = input.value.trim().toLowerCase();
-    const found = companies.find(c =>
-      c.symbol.toLowerCase() === query || c.name.toLowerCase() === query
-    );
-
-    if (found) {
-      input.value = found.symbol;
-    } else {
-      e.preventDefault();
-      suggestionsBox.innerHTML = `<li style="color: red; padding: 0.5rem 1rem;">Not a valid stock. Please select from the list.</li>`;
-      suggestionsBox.style.display = "block";
-    }
-  });
-
-  document.addEventListener("click", e => {
-    if (!suggestionsBox.contains(e.target) && e.target !== input) {
-      suggestionsBox.innerHTML = "";
-      suggestionsBox.style.display = "none";
-    }
-  });
-});
 </script>
 
 <script>
   const ticker = "{{ stock_data.ticker|lower }}";
-const socket = new WebSocket(`ws://${window.location.host}/ws/stocks/${ticker}/`);
+  const socket = new WebSocket(`ws://${window.location.host}/ws/stocks/${ticker}/`);
 
-socket.onopen = () => {
-  console.log("✅ WebSocket connected.");
-};
+  socket.onopen = () => console.log("✅ WebSocket connected.");
 
-socket.onmessage = function(event) {
-  console.log("📥 WebSocket message received:", event.data);
+  socket.onmessage = function (event) {
+    console.log("📥 WebSocket message received:", event.data);
+    const data = JSON.parse(event.data);
 
-  const data = JSON.parse(event.data);
+    if (data.current !== undefined) {
+      document.getElementById("live-price").textContent = `$${data.current}`;
+    }
 
-  if (data.current !== undefined) {
-    document.getElementById("live-price").textContent = `$${data.current}`;
-  }
-  if (data.change !== undefined) {
-    const changeElement = document.getElementById("live-change");
-    changeElement.textContent = `${data.change >= 0 ? '+' : ''}${data.change.toFixed(2)} (${data.percent_change.toFixed(2)}%)`;
-    changeElement.className = data.change >= 0 ? "stock-change positive" : "stock-change negative";
-  }
-};
+    if (data.change !== undefined) {
+      const changeElement = document.getElementById("live-change");
+      changeElement.textContent = `${data.change >= 0 ? '+' : ''}${data.change.toFixed(2)} (${data.percent_change.toFixed(2)}%)`;
+      changeElement.className = data.change >= 0 ? "stock-change positive" : "stock-change negative";
+    }
+  };
 
-socket.onclose = () => {
-  console.warn("❌ WebSocket disconnected.");
-};
-
-socket.onerror = (error) => {
-  console.error("⚠️ WebSocket error:", error);
-};
-
-  socket.onopen = () => console.log("WebSocket connected.");
-  socket.onclose = () => console.log("WebSocket disconnected.");
+  socket.onclose = () => console.warn("❌ WebSocket disconnected.");
+  socket.onerror = error => console.error("⚠️ WebSocket error:", error);
 </script>
 {% endblock %}

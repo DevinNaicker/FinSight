@@ -58,8 +58,11 @@ def home(request):
         if live_mode:
             for ticker in tickers:
                 popular_stocks[ticker] = {
-                    'price': 0.0, 'change': 0.0, 'abs_change': 0.0,
-                    'percent': 0.0, 'name': ticker
+                    'price': 0.0,
+                    'change': 0.0,
+                    'abs_change': 0.0,
+                    'percent': 0.0,
+                    'name': ticker
                 }
         else:
             stock_api_key = settings.TWELVE_DATA_API_KEY
@@ -76,7 +79,7 @@ def home(request):
                         'change': change,
                         'abs_change': abs(change),
                         'percent': float(stock['percent_change']),
-                        'name': stock.get('name', ''),
+                        'name': stock.get('name', '')
                     }
 
         # Currencies (WebSocket placeholder)
@@ -147,7 +150,7 @@ def stock_search(request):
                 'low': float(quote_response['low']),
                 'prev_close': float(quote_response['previous_close']),
                 'change': float(quote_response['change']),
-                'percent_change': float(quote_response['percent_change']),
+                'percent_change': float(quote_response['percent_change'])
             }
 
             # Chart Data
@@ -161,7 +164,7 @@ def stock_search(request):
 
                 chart_data = {
                     'labels': json.dumps(labels),
-                    'prices': json.dumps(prices),
+                    'prices': json.dumps(prices)
                 }
 
             stats_data = {
@@ -170,7 +173,7 @@ def stock_search(request):
                 'prev_close': float(quote_response.get('previous_close', 0)),
                 'open': float(quote_response.get('open', 0)),
                 'high': float(quote_response.get('high', 0)),
-                'low': float(quote_response.get('low', 0)),
+                'low': float(quote_response.get('low', 0))
             }
 
             # Related News
@@ -182,8 +185,7 @@ def stock_search(request):
                 news_response = requests.get(news_url).json()
 
                 if news_response.get("status") == "ok":
-                    articles = news_response.get("articles", [])
-                    for article in articles:
+                    for article in news_response.get("articles", []):
                         title = article.get('title', '')
                         source = article.get('source', {}).get('name', '')
                         url = article.get('url')
@@ -212,12 +214,11 @@ def stock_search(request):
         except Exception as e:
             error = str(e)
             print(f"Error fetching stock data: {error}")
-        
 
     return render(request, 'stocks/stock_search.html', {
         'stock_data': stock_data,
         'chart_data': chart_data,
         'stats_data': stats_data,
         'related_news': related_news,
-        'error': error,
+        'error': error
     })

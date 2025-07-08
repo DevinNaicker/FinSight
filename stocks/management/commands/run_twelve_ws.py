@@ -8,7 +8,6 @@ from django.conf import settings
 import re
 
 API_KEY = settings.TWELVE_DATA_API_KEY
-
 POPULAR_TICKERS = ["EUR/USD", "BTC/USD"]
 
 async def connect_to_twelve_data():
@@ -74,10 +73,12 @@ async def connect_to_twelve_data():
     except Exception as e:
         print("❌ Connection error:", e)
         await asyncio.sleep(5)
-        await connect_to_twelve_data()  # Reconnect
+        await connect_to_twelve_data()
+
 
 def run():
     asyncio.run(connect_to_twelve_data())
+
 
 class Command(BaseCommand):
     help = 'Run Twelve Data WebSocket integration'

@@ -1,4 +1,3 @@
-<!-- DEBUG: home.html LIVE -->
 {% extends 'base.html' %}
 {% load static %}
 {% load humanize %}
@@ -110,43 +109,43 @@
   }
 
   .currency-card {
-  flex: 1;
-  min-width: 200px;
-  height: 90px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0.6rem 1rem;
-  background-color: #051d40;
-  border: 2px solid #bebec0;
-  border-radius: 10px;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
+    flex: 1;
+    min-width: 200px;
+    height: 90px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.6rem 1rem;
+    background-color: #051d40;
+    border: 2px solid #bebec0;
+    border-radius: 10px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
 
-.currency-info {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: flex-start;
-}
+  .currency-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+  }
 
-.currency-name {
-  font-size: 1.3rem;
-  font-weight: 600;
-  color: white;
-}
+  .currency-name {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: white;
+  }
 
-.currency-full-name {
-  font-size: 1.2rem !important;
-  color: #1cabb0 !important;
-}
+  .currency-full-name {
+    font-size: 1.2rem !important;
+    color: #1cabb0 !important;
+  }
 
-.currency-price {
-  font-size: 1.5rem;
-  font-weight: 600;
-  color: white;
-  text-align: right;
-}
+  .currency-price {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: white;
+    text-align: right;
+  }
 
   #suggestions {
     position: absolute;
@@ -212,21 +211,21 @@
   <h3 class="mb-3 text-white">Currencies</h3>
   <div class="currency-row">
     {% for slug, data in slugged_currency_data.items %}
-    <div class="currency-card" id="currency-{{ slug }}">
-  <div class="currency-info">
-    <div class="currency-name">{{ data.pair }}</div>
-    <div class="currency-full-name text-muted" style="font-size: 0.9rem;">
-      {{ data.display }}
-    </div>
-  </div>
-  <div class="currency-price" id="currency-price-{{ slug }}">
-  {% if data.pair == "EUR/USD" %}
-    ${{ data.price|floatformat:5|intcomma }}
-  {% else %}
-    ${{ data.price|floatformat:2|intcomma }}
-  {% endif %}
-</div>
-</div> 
+      <div class="currency-card" id="currency-{{ slug }}">
+        <div class="currency-info">
+          <div class="currency-name">{{ data.pair }}</div>
+          <div class="currency-full-name text-muted" style="font-size: 0.9rem;">
+            {{ data.display }}
+          </div>
+        </div>
+        <div class="currency-price" id="currency-price-{{ slug }}">
+          {% if data.pair == "EUR/USD" %}
+            ${{ data.price|floatformat:5|intcomma }}
+          {% else %}
+            ${{ data.price|floatformat:2|intcomma }}
+          {% endif %}
+        </div>
+      </div>
     {% endfor %}
   </div>
 
@@ -358,7 +357,6 @@
 
 <!-- WebSocket for Live Currency Prices -->
 <script>
-  // ✅ Define formatter with variable decimal precision
   const formatNumber = (num, decimals = 2) => {
     return num.toLocaleString(undefined, {
       minimumFractionDigits: decimals,
@@ -366,7 +364,6 @@
     });
   };
 
-  // ✅ WebSocket logic
   const currencies = {{ currencies|safe }};
   currencies.forEach(pair => {
     const slug = pair.replace('/', '-').toLowerCase();
@@ -380,7 +377,6 @@
 
       const priceElement = document.getElementById(`currency-price-${slug}`);
       if (priceElement) {
-        // Use 5 decimals for EUR/USD, 2 for others
         const decimals = pair === "EUR/USD" ? 5 : 2;
         priceElement.textContent = `$${formatNumber(data.current, decimals)}`;
       } else {
