@@ -1,5 +1,5 @@
 # 📊 FinSight
-
+![logo](images/FinSight.png)
 **FinSight** is a modern web application for tracking live stock and currency prices, discovering market trends, and staying updated with the latest financial news — all in one interactive platform.
 
 ---
