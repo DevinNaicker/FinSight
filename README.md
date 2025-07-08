@@ -43,6 +43,9 @@
 ```bash
 git clone https://github.com/yourusername/finsight.git
 cd finsight
+```
+###2. Create a virtual environment and activate it
+```
 python -m venv venv
 source venv/bin/activate  # On Windows: venv\Scripts\activate
 pip install -r requirements.txt
