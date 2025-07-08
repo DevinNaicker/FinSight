@@ -99,8 +99,8 @@ _(Add screenshots of your homepage, stock view, and WebSocket live updates here.
 Finance graduate turned software developer.  
 Passionate about fintech and building tools that make financial data accessible.
 
-- GitHub: [@yourusername](https://github.com/yourusername)  
-- LinkedIn: [Thirushan Naicker](https://www.linkedin.com/in/yourlinkedin) <!-- Update this link -->
+- GitHub: [@DevinNaicker](https://github.com/DevinNaicker)  
+- LinkedIn: [Thirushan Naicker](https://www.linkedin.com/in/devin-naicker-659711a4)
 
 ---
 
