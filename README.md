@@ -6,13 +6,13 @@
 
 ## 📂 Table of Contents
 
-- [Features](#-features)
-- [Tech Stack](#%EF%B8%8F-tech-stack)
-- [Getting Started (Local Development)](#-getting-started)
-- [Screenshots](#-screenshots)
-- [Future Enhancements](#-future-enhancements)
-- [Author](#-author)
-- [License](#-license)
+- [🚀 Features](#-features)
+- [🛠️ Tech Stack](#%EF%B8%8F-tech-stack)
+- [🧪 Getting Started (Local Development)](#-getting-started-local-development)
+- [📸 Screenshots](#-screenshots)
+- [✅ Future Enhancements](#-future-enhancements)
+- [👨‍💻 Author](#-author)
+- [📄 License](#-license)
 
 ---
 
