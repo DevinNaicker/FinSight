@@ -7,7 +7,7 @@
 ## 📂 Table of Contents
 
 - [Features](#-features)
-- [Tech Stack](#-tech-stack)
+- [Tech Stack](#%EF%B8%8F-tech-stack)
 - [Getting Started (Local Development)](#-getting-started)
 - [Screenshots](#-screenshots)
 - [Future Enhancements](#-future-enhancements)
