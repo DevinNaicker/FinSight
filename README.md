@@ -76,10 +76,21 @@ In a separate terminal tab/window:
 ```
 python manage.py run_twelve_ws
 ```
+---
 
 ## 📸 Screenshots
 
-_(Add screenshots of your homepage, stock view, and WebSocket live updates here.)_
+### Homepage with Live Data, Popular Stocks, and Financial Newsfeed
+![home](images/homepage.png)
+
+### Stocks Page with Financial Overview and Data
+![stocks](images/stocks.png)
+
+### Stocks Page Newsfeed with News Specific to the Stock at Hand
+![stocks_newsfeed](images/stocks_newsfeed.png)
+
+### Newsfeed Page with Relevant and Current News
+![news](images/newsfeed.png)
 
 ---
 
